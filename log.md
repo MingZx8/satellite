@@ -56,9 +56,33 @@ __Image quality:__
 __N of objects:__  
 32,716 (58,247 negative examples)  
 
+4. [xView](http://xviewdataset.org/)  
+__Object categories:__  
+60 classes  
+__Data source:__  
+?  
+__Area:__  
+?   
+__Image quality:__  
+0.3m per pixel    
+__N of objects:__  
+1 million  
 
+5. [SpaceNet](https://spacenet.ai/)  
+building detection  
 
-
+6. [DroneDeploy Segmentation Dataset](https://github.com/dronedeploy/dd-ml-segmentation-benchmark)
+__Object categories:__  
+car, building, clutter, vegetation, water, ground  
+__Data source:__  
+?  
+__Area:__  
+?   
+__Image quality:__  
+0.1m per pixel    
+__N of objects:__  
+?   
+  
 ## data
 ### data requirements
 
@@ -69,3 +93,6 @@ __Resolution:__
 __Price:__  
 ?  
 3-5m free trail  
+
+2. [DigitalGlobe](https://www.digitalglobe.com/usecases#identify)
+
