@@ -1,12 +1,14 @@
 # Log
 _02.02 - 02.09_  
-1. searching sources: annotated dataset, satellite images, models...  
++ ~~searching sources: annotated dataset, satellite images, models...~~   
++ vehicle detection in some sample satellite images
   
 __Q:__    
 1. vehicle classification?  
-2. time? image quality (tree branches, vehicle shadow...)?  
-3. other info (land use, trees, footprint...)? 
-4. parking cars? manually remove?  
+2. ~~time? some specific time for the same location (for one method: use vehicle number to estimate AADT)~~ 
+1. image quality (tree branches, vehicle shadow...)?  
+3. ~~other info (land use, trees, footprint...)? yes~~  what kind of land use?  
+4. ~~parking cars? manually remove? if the vehicle is less than 1m to the roadside then it is parked~~  
 5. area? (squares? n of images? image size?)  
 
 
