@@ -1,7 +1,9 @@
 # Log
 _02.02 - 02.09_  
 + ~~searching sources: annotated dataset, satellite images, models...~~   
-+ vehicle detection in some sample satellite images
++ vehicle and road boarder detection in some satellite samples
+  - color filter
+  - CNN (YOLT)
   
 __Q:__    
 1. vehicle classification?  
