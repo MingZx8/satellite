@@ -1,9 +1,13 @@
 # Log
 _02.02 - 02.09_  
 + ~~searching sources: annotated dataset, satellite images, models...~~   
-+ vehicle and road boarder detection in some satellite samples
++ __Vehicle__ and __road boarder__ detection in some satellite samples
   - color filter
-  - CNN (YOLT)
+  - CNN 
+    + pre
+      - nvidia driver (2 gpu)      
+    + [SIMRDWN(YOLT)](https://github.com/avanetten/simrdwn)
+      
   
 __Q:__    
 1. vehicle classification?  
