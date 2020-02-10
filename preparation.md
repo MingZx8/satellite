@@ -53,6 +53,7 @@ recommand nvidia-docker2
 Follow the instruction to install  
 add path to environment  
 `sudo nano ~/.bashrc`  
+add `export PATH=$PATH:/usr/local/cuda/bin`
 
 
 #### *remove and replace the old CUDA
