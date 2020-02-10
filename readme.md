@@ -1,13 +1,39 @@
 # Log
 _02.02 - 02.09_  
-+ ~~searching sources: annotated dataset, satellite images, models...~~   
++ ~~searching sources: annotated dataset, satellite images, models...~~ 
+  - [object detection sources lists](https://github.com/hoya012/deep_learning_object_detection)
+  - [object detection in aerial images papers](https://github.com/murari023/awesome-aerial-object-detection#awesome-resources)
+  - [satellite images related](https://github.com/robmarkcole/satellite-image-deep-learning)
+  
++ ~~build [environment](https://github.com/ReehcQ/satellite/blob/master/preparation.md) for gpu-based detection models~~
+  - ~~drivers~~
+  - ~~tensorflow & CUDA~~
+  - ~~docker~~
+  
 + __Vehicle__ and __road boarder__ detection in some satellite samples
   - color filter
-  - CNN 
-    + pre
-      - nvidia driver (2 gpu)      
+    + [based on sklearn](https://github.com/planetlabs/notebooks/blob/master/jupyter-notebooks/ship-detector/01_ship_detector.ipynb)
+  - CNN (available models)
     + [SIMRDWN(YOLT)](https://github.com/avanetten/simrdwn)
-      
+      - [ref1](https://cloud.tencent.com/developer/news/237042)
+      - [ref2](https://medium.com/the-downlinq/you-only-look-twice-multi-scale-object-detection-in-satellite-imagery-with-convolutional-neural-38dad1cf7571)
+      - [ref3](https://medium.com/the-downlinq/building-extraction-with-yolt2-and-spacenet-data-a926f9ffac4f)
+    + [SlimYOLO](https://github.com/PengyiZhang/SlimYOLOv3)
+    + [Fast-RCNN based net](https://github.com/vyzboy92/Object-Detection-Net)
+    + [Yolov3, here is the comparison of yolo and fast-rcnn](https://github.com/aniskoubaa/car_detection_yolo_faster_rcnn_uvsc2019)
+    + [DRFBNet3000](https://github.com/seongkyun/DRFBNet300)
+      - [ref](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6767679/)
+    + [ResNet50](https://github.com/buzkent86/Aerial_Vehicle_Classification)
+    + [RetinaNet](https://towardsdatascience.com/object-detection-on-aerial-imagery-using-retinanet-626130ba2203)
+      - [keras RetinaNet](https://github.com/fizyr/keras-retinanet)
+      - [pedestrain detection](https://towardsdatascience.com/pedestrian-detection-in-aerial-images-using-retinanet-9053e8a72c6)
+    + [U-Net](https://deepsense.ai/deep-learning-for-satellite-imagery-via-image-segmentation/)
+    
++ land-use detection
+  - [1](https://github.com/datasciencecampus/laika)
+  - [Mask-RCNN](https://github.com/jremillard/images-to-osm)
+  - [building](https://github.com/neptune-ai/open-solution-mapping-challenge)
+  
   
 __Q:__    
 1. vehicle classification?  
@@ -16,7 +42,10 @@ __Q:__
 3. ~~other info (land use, trees, footprint...)? yes~~  what kind of land use?  
 4. ~~parking cars? manually remove? if the vehicle is less than 1m to the roadside then it is parked~~  
 5. area? (squares? n of images? image size?)  
+6. AADT focus on highways? how about the congested roads?
 
+# Check the project
+[:)](https://github.com/ReehcQ/satellite/blob/master/intro.md)
 
 # Reference
 ## models
