@@ -34,8 +34,13 @@ _02.02 - 02.09_
   - [Mask-RCNN](https://github.com/jremillard/images-to-osm)
   - [building](https://github.com/neptune-ai/open-solution-mapping-challenge)
   
-  
-__Q:__    
+## TODO
+1. choose a dataset where images have the similar quality to google earth/maps'
+2. train and test on available models
+3. compare and choose a good match
+4. extract road on images
+
+## Q   
 1. vehicle classification?  
 2. ~~time? some specific time for the same location (for one method: use vehicle number to estimate AADT)~~ 
 1. image quality (tree branches, vehicle shadow...)?  
