@@ -49,8 +49,13 @@ recommand nvidia-docker2
 `pip install tensorflow-gpu`
 
 #### install CUDA
-[Download CUDA 10.1](https://developer.nvidia.com/cuda-10.1-download-archive-base?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=deblocal)  
+[Download CUDA 10.0](https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal)  
 Follow the instruction to install
 
 #### *remove and replace the old CUDA
-
+clean cache  
+`sudo dpkg --configure -a`  
+`sudo apt-get clean`  
+clean broken package  
+`dpkg -l | grep cuda- | awk '{print $2}' | xargs -n1 sudo dpkg --purge`  
+`df -h`  
