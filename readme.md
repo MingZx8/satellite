@@ -1,5 +1,5 @@
 # Log
-_02.02 - 02.09_  
+### _02.02 - 02.09_  
 + ~~searching sources: annotated dataset, satellite images, models...~~ 
   - [object detection sources lists](https://github.com/hoya012/deep_learning_object_detection)
   - [object detection in aerial images papers](https://github.com/murari023/awesome-aerial-object-detection#awesome-resources)
@@ -34,11 +34,18 @@ _02.02 - 02.09_
   - [Mask-RCNN](https://github.com/jremillard/images-to-osm)
   - [building](https://github.com/neptune-ai/open-solution-mapping-challenge)
   
+### _02.10 - 02.16_  
+
+
+
 ## TODO
+### _02.02 - 02.09_  
 1. choose a dataset where images have the similar quality to google earth/maps'
 2. train and test on available models
 3. compare and choose a good match
 4. extract road on images
+
+
 
 ## Q   
 1. vehicle classification?  
