@@ -35,7 +35,10 @@
   - [building](https://github.com/neptune-ai/open-solution-mapping-challenge)
   
 ### _02.10 - 02.16_  
-
++ color-filter for road detection
++ yolt?????? installation error
++ google maps/earth api to download images
++ AADT available time slot for filtering images
 
 
 ## TODO
