@@ -1,4 +1,22 @@
 # Log
+### _02.10 - 02.16_  
++ road detection
+  - [RoadNet](https://github.com/yhlleo/RoadNet)
+  - [deepSeg](https://github.com/yhlleo/DeepSegmentor)
+  - [U-Net](https://github.com/ArkaJU/U-Net-Satellite)
+  - [airs?](https://github.com/mahmoudmohsen213/airs)
+  - [road_seg](https://github.com/dariopavllo/road-segmentation)
++ yolt?????? installation error
++ google maps static api to download images
+  - [pricing](https://developers.google.com/maps/documentation/maps-static/usage-and-billing)
+  - key: AIzaSyC1tQUXzpoV0Wuj7E5ukEDfnLDDibbzxrg
+  - location ex: 43.655305, -79.348989
+  - zoom: 16, 17
+    - __TODO__: test which zoom size is better for detection
+    - __TODO__: convert latitude and longitude to pixel
+  - scale: 2, w*h: 640 * 640, get 1280 * 1280 pixels images
++ AADT available time slot for filtering images
+
 ### _02.02 - 02.09_  
 + ~~searching sources: annotated dataset, satellite images, models...~~ 
   - [object detection sources lists](https://github.com/hoya012/deep_learning_object_detection)
@@ -33,12 +51,7 @@
   - [1](https://github.com/datasciencecampus/laika)
   - [Mask-RCNN](https://github.com/jremillard/images-to-osm)
   - [building](https://github.com/neptune-ai/open-solution-mapping-challenge)
-  
-### _02.10 - 02.16_  
-+ color-filter for road detection
-+ yolt?????? installation error
-+ google maps/earth api to download images
-+ AADT available time slot for filtering images
+  - [robosat](https://github.com/mapbox/robosat) semantic segmentation
 
 
 ## TODO
@@ -47,7 +60,6 @@
 2. train and test on available models
 3. compare and choose a good match
 4. extract road on images
-
 
 
 ## Q   
