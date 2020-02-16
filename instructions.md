@@ -1,20 +1,27 @@
-1. Check if you can extract time and date from google api images
-(please just check the website and/or try to extract it only for one point).
+1. ~~Check if you can extract time and date from google api images~~
+~~(please just check the website and/or try to extract it only for one point).~~
+__google maps does not provide captured date__
 
-2. If this is possible to extract the date and hour from google api, 
-then please send me all times and dates of google api images for the coordinates I sent to you. 
+2. ~~If this is possible to extract the date and hour from google api,~~ 
+~~then please send me all times and dates of google api images for the coordinates I sent to you. 
 I will check city database to see if there are observed hourly traffic data (C(obs)) for the dates
-you have found google api images
+you have found google api images~~
 
-3. If we can not extract time and date of image from google api. 
-Please check google earth image. 
+3. ~~If we can not extract time and date of image from google api.~~
+~~Please check google earth image. 
 Please check if we can extract date and time for google earth images 
-(please just check the website and/or try to extract it only for one point).
+(please just check the website and/or try to extract it only for one point).~~  
+__google earth has the historical imagery, and google maps show the image with the best quality__  
+__for some reason, it does not show the vehicle on the road__  
+__Can we choose the image from google earth?__  
 
-4. If this is possible to extract the date and hour from google earth, 
-then please send me all times and dates of google earth images for the coordinates I sent to you. 
+4. ~~If this is possible to extract the date and hour from google earth,~~ 
+~~then please send me all times and dates of google earth images for the coordinates I sent to you. 
 I will check city database to see if there are observed hourly traffic data (C(obs)) for the dates 
-you have found google earth images.
+you have found google earth images.~~
+
+__Check the sun position and estimate the time according to the shadow:__  
+__[SunEarthTool](https://www.sunearthtools.com/dp/tools/pos_sun.php)__
 
 5. If I found enough data (from steps 2 / 3) then I will ask you to count vehicles (C(x)) on the closet road 
 to the coordinates using image processing. We also need to find the road length (x) at the same time from these images.
