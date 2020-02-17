@@ -12,8 +12,8 @@ you have found google api images~~
 Please check if we can extract date and time for google earth images 
 (please just check the website and/or try to extract it only for one point).~~  
 __google earth has the historical imagery, and google maps show the image with the best quality__  
-__for some reason, it does not show the vehicle on the road__  
-__Can we choose the image from google earth?__  
+__Q:__
+  Why we do not use the image from google earth directly?  
 
 4. ~~If this is possible to extract the date and hour from google earth,~~ 
 ~~then please send me all times and dates of google earth images for the coordinates I sent to you. 
