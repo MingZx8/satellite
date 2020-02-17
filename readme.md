@@ -6,6 +6,10 @@
   - [U-Net](https://github.com/ArkaJU/U-Net-Satellite)
   - [airs?](https://github.com/mahmoudmohsen213/airs)
   - [road_seg](https://github.com/dariopavllo/road-segmentation)
++ Arman's [instructions](https://github.com/ReehcQ/satellite/blob/master/instructions.md)
+  - [AADT example](https://github.com/ReehcQ/satellite/blob/master/AADT%20example.csv)
+  - find the date in google earth according to the locations
+  - estimate the time according to the sun position: [SunEarthTool](https://www.sunearthtools.com/dp/tools/pos_sun.php)
 + google maps static api to download images
   - [pricing](https://developers.google.com/maps/documentation/maps-static/usage-and-billing) 每月免额$200？？？
   - key: AIzaSyC1tQUXzpoV0Wuj7E5ukEDfnLDDibbzxrg
@@ -18,7 +22,7 @@
 + __TODO__: AADT available time slot for filtering images
 + vehicle detection
   - YOLOv3: 只有zoom20的时候可以识别出一辆车
-  
+
 
 ### _02.02 - 02.09_  
 + ~~searching sources: annotated dataset, satellite images, models...~~ 
