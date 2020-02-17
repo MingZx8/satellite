@@ -1,5 +1,6 @@
 1. ~~Check if you can extract time and date from google api images~~
 ~~(please just check the website and/or try to extract it only for one point).~~  
+
 __google maps does not provide captured date__
 
 2. ~~If this is possible to extract the date and hour from google api,~~ 
@@ -11,6 +12,7 @@ you have found google api images~~
 ~~Please check google earth image. 
 Please check if we can extract date and time for google earth images 
 (please just check the website and/or try to extract it only for one point).~~  
+
 __google earth has the historical imagery, and google maps show the image with the best quality__  
 __Q:__
   Why we do not use the image from google earth directly?  
