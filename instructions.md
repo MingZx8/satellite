@@ -1,5 +1,5 @@
 1. ~~Check if you can extract time and date from google api images~~
-~~(please just check the website and/or try to extract it only for one point).~~
+~~(please just check the website and/or try to extract it only for one point).~~  
 __google maps does not provide captured date__
 
 2. ~~If this is possible to extract the date and hour from google api,~~ 
