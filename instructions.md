@@ -22,8 +22,10 @@ __Q:__
 I will check city database to see if there are observed hourly traffic data (C(obs)) for the dates 
 you have found google earth images.~~
 
-__Check the sun position and estimate the time according to the shadow:__  
-__[SunEarthTool](https://www.sunearthtools.com/dp/tools/pos_sun.php)__
+~~__Check the sun position and estimate the time according to the shadow:__  
+__[SunEarthTool](https://www.sunearthtools.com/dp/tools/pos_sun.php)__~~
+__Check the sun position using sun simulator (google earth) and estimate the time according to the building shadow__  
+
 
 5. If I found enough data (from steps 2 / 3) then I will ask you to count vehicles (C(x)) on the closet road 
 to the coordinates using image processing. We also need to find the road length (x) at the same time from these images.
@@ -39,3 +41,25 @@ t=x/v  à assume that t is in minute
 9. Then, we compared observed hourly traffic counts (C(obs) from step 2 or 4) with C(h) (step 8).
 
 10. Finally, and if approximated hourly values (C(h)) are good, we use TEPs to find AADTs.
+
+####dataset
+[COWC](https://gdo152.llnl.gov/cowc/)  
+__Object categories:__  
+car  
+__Data source:__  
+?  
+__Area:__  
+Toronto, Selwyn, Potsdam, Vaihingen, Columbus, Utah    
+__Image quality:__  
+0.15m per pixel    
+__N of objects:__  
+32,716 (58,247 negative examples)  
+  
+need to slice the images into small pieces  
+
+####model
+some are aerial based, some are satellite based.  
+[SIMRDWN(YOLT)](https://github.com/avanetten/simrdwn)  
+[SlimYOLO](https://github.com/PengyiZhang/SlimYOLOv3)  
+[ResNet50](https://github.com/buzkent86/Aerial_Vehicle_Classification)  
+...  
