@@ -42,24 +42,10 @@ t=x/v  à assume that t is in minute
 
 10. Finally, and if approximated hourly values (C(h)) are good, we use TEPs to find AADTs.
 
-####dataset
-[COWC](https://gdo152.llnl.gov/cowc/)  
-__Object categories:__  
-car  
-__Data source:__  
-?  
-__Area:__  
-Toronto, Selwyn, Potsdam, Vaihingen, Columbus, Utah    
-__Image quality:__  
-0.15m per pixel    
-__N of objects:__  
-32,716 (58,247 negative examples)  
-  
-need to slice the images into small pieces  
+## objective
+vehicle detection  
+road detection
 
-####model
-some are aerial based, some are satellite based.  
-[SIMRDWN(YOLT)](https://github.com/avanetten/simrdwn)  
-[SlimYOLO](https://github.com/PengyiZhang/SlimYOLOv3)  
-[ResNet50](https://github.com/buzkent86/Aerial_Vehicle_Classification)  
-...  
+## methods
+1. color filter
+2. cnn
