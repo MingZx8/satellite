@@ -6,6 +6,7 @@
   - [U-Net](https://github.com/ArkaJU/U-Net-Satellite)
   - [airs?](https://github.com/mahmoudmohsen213/airs)
   - [road_seg](https://github.com/dariopavllo/road-segmentation)
+  - [cnn](http://cs230.stanford.edu/projects_winter_2019/reports/15812659.pdf)
 + Arman's [instructions](https://github.com/ReehcQ/satellite/blob/master/instructions.md)
   - [AADT example](https://github.com/ReehcQ/satellite/blob/master/AADT%20example.csv)
   - find the date in google earth according to the locations
