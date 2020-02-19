@@ -9,7 +9,9 @@
 + Arman's [instructions](https://github.com/ReehcQ/satellite/blob/master/instructions.md)
   - [AADT example](https://github.com/ReehcQ/satellite/blob/master/AADT%20example.csv)
   - find the date in google earth according to the locations
-  - estimate the time according to the sun position: [SunEarthTool](https://www.sunearthtools.com/dp/tools/pos_sun.php)
+  - estimate the time according to the sun position: 
+~~[SunEarthTool](https://www.sunearthtools.com/dp/tools/pos_sun.php)~~  
+google earth sun simulator
 + google maps static api to download images
   - [pricing](https://developers.google.com/maps/documentation/maps-static/usage-and-billing) 每月免额$200？？？
   - key: AIzaSyC1tQUXzpoV0Wuj7E5ukEDfnLDDibbzxrg
@@ -19,9 +21,11 @@
     - __TODO__: convert latitude and longitude to pixel
     - __TODO__: check the captured date on Google Earth
   - scale: 2, w*h: 640 * 640, get 1280 * 1280 pixels images
-+ __TODO__: AADT available time slot for filtering images
 + vehicle detection
+  - __TODO__: color filter
   - YOLOv3: 只有zoom20的时候可以识别出一辆车
+  - __TODO__: split dataset COWC
+  - __TODO__: YOLT
 
 
 ### _02.02 - 02.09_  
