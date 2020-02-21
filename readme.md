@@ -1,4 +1,13 @@
 # Log
+### _02.17 - 02.23_
++ instructions: 
+  - color filter: [Matlab threshold](https://www.mathworks.com/matlabcentral/fileexchange/25682-color-threshold)
+    - road
+    - vehicle
++ cnn:
+  - __TODO__: split dataset COWC
+  - __TODO__: YOLT
+
 ### _02.10 - 02.16_  
 + road detection
   - [RoadNet](https://github.com/yhlleo/RoadNet)
