@@ -6,8 +6,9 @@
     - vehicle
 + cnn:
   - [DOTA](https://captain-whu.github.io/DOTA/dataset.html)
-  - __TODO__: split dataset COWC
-  - __TODO__: YOLT
+    - pytorch
+      + installation
+        - conda environment: dota3
 
 ### _02.10 - 02.16_  
 + road detection
