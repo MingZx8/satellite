@@ -62,17 +62,25 @@ data/dota
     └── images
 ```
 
-## Test images
+# Test images
 #### Split original images to 1024*1024 pixels and create COCO formate json
-###### modified DOTA_devkit/prepare_dota1.py, mute 71-85 rows, only keep split_test
+###### modified `DOTA_devkit/prepare_dota1.py`, mute 71-85 rows, only keep split_test
 ```
 python DOTA_devkit/prepare_dota1.py --srcpath <dota_set_path> --dstpath <dota_1024_path>
 ```
-where `dota_set_path/test/images` is required  
+where `<dota_set_path>/test/images` is required  
 
 #### Download pre-trained weights
-[](https://drive.google.com/drive/folders/1IsVLm7Yrwo18jcx0XjnCzFQQaf1WQEv8)
+Download [weights](https://drive.google.com/drive/folders/1IsVLm7Yrwo18jcx0XjnCzFQQaf1WQEv8) and put the .pth file to `<faster_rcnn_RoITrans_r50_fpn_1x_dota_model_path>`  
+Configs are in `configs/DOTA`
 
+#### Test
+##### Faster R-CNN
+```
+python tools/test.py configs/DOTA/faster_rcnn_RoITrans_r50_fpn_1x_dota.py \
+    <faster_rcnn_RoITrans_r50_fpn_1x_dota_model_path>/epoch_12.pth \ 
+    --out <result_path>/results.pkl
+```
 
 # Reference 
 [AerialDetection](https://github.com/dingjiansw101/AerialDetection)
