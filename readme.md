@@ -1,4 +1,20 @@
 # Log
+### _02.24 - 03.01_
+  + [DOTA](https://captain-whu.github.io/DOTA/dataset.html)
+    - 2806 aerial images from sensors and platforms
+    - 800 * 800 to 4000 * 4000 pixels
+    - 15 classes
+    - 188,282 instances
+    - we achieve a good balance between small instances and middleinstances, which is more similar to real-world scenes
+    - corp patches of 1024 * 1024 with a stride set to 512
+    - [model](https://github.com/ReehcQ/satellite/blob/master/dota.md)
+    
+  + other dataset
+    - TAS
+    - VEDAI
+    - COWC
+    - 3K vehicle detection
+
 ### _02.17 - 02.23_
 + instructions: 
   - color filter: [Matlab threshold](https://www.mathworks.com/matlabcentral/fileexchange/25682-color-threshold)
