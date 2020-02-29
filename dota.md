@@ -71,16 +71,25 @@ python DOTA_devkit/prepare_dota1.py --srcpath <dota_set_path> --dstpath <dota_10
 where `<dota_set_path>/test/images` is required  
 
 #### Download pre-trained weights
-Download [weights](https://drive.google.com/drive/folders/1IsVLm7Yrwo18jcx0XjnCzFQQaf1WQEv8) and put the .pth file to `<faster_rcnn_RoITrans_r50_fpn_1x_dota_model_path>`  
+Download [weights](https://drive.google.com/drive/folders/1IsVLm7Yrwo18jcx0XjnCzFQQaf1WQEv8) and put the .pth file to `<dota_model_path>`  
 Configs are in `configs/DOTA`
 
 #### Test
 ##### Faster R-CNN
+set the path of images and annotation file in `tools/test.py`  
+add two line codes in row 156
+```
+cfg.data.test.ann_file = '<annotation_file generated from preparation step, it's a json file>'
+cfg.data.test.img_prefix = '<img_path>'
+```
 ```
 python tools/test.py configs/DOTA/faster_rcnn_RoITrans_r50_fpn_1x_dota.py \
     <faster_rcnn_RoITrans_r50_fpn_1x_dota_model_path>/epoch_12.pth \ 
     --out <result_path>/results.pkl
 ```
+
+#### Visualize the result
+[Code](https://github.com/ReehcQ/satellite/blob/master/code/test.py)
 
 # Reference 
 [AerialDetection](https://github.com/dingjiansw101/AerialDetection)
