@@ -88,8 +88,18 @@ python tools/test.py configs/DOTA/faster_rcnn_RoITrans_r50_fpn_1x_dota.py \
     --out <result_path>/results.pkl
 ```
 
+##### mask R-CNN
+```
+python tools/test.py configs/DOTA/mask_rcnn_r50_fpn_1x_dota.py \
+    <model_path>/mask_rcnn_r50_fpn_1x_dota/epoch_12.pth \
+    --out <result_path>/results.pkl 
+```
+
 #### Visualize the result
+##### Faster R-CNN
 [Code](https://github.com/ReehcQ/satellite/blob/master/code/test.py)
+
+
 
 # Reference 
 [AerialDetection](https://github.com/dingjiansw101/AerialDetection)
