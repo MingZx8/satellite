@@ -1,6 +1,12 @@
 # Log
 ### _03.02 - 03.08_
-
+  + [slides](https://github.com/ReehcQ/satellite/blob/master/slides/0310_notes.pptx)
+  + compare 4 dimensions
+    - 512(w)x512(h)x2(scale)x19(zoom)
+  + applied to all example locations
+  + improve:
+    - remove small misslabelled objects
+    - remove twice-detected box
 
 ### _02.24 - 03.01_
   + [DOTA](https://captain-whu.github.io/DOTA/dataset.html)
@@ -17,8 +23,6 @@
     - VEDAI
     - COWC
     - 3K vehicle detection
-    
-  + 
 
 ### _02.17 - 02.23_
 + instructions: 
