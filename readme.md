@@ -1,4 +1,15 @@
 # Log
+### _03.09 - 03.15_
+  + road detection
+    - MIT: 
+      + [1](https://roadmaps.csail.mit.edu/roadtracer/)
+      + [2](http://news.mit.edu/2018/new-way-to-automatically-build-road-maps-with-aerial-images-0417)
+    - UofT:
+      + [1](https://github.com/mitmul/ssai-cnn)
+      + [2](https://www.cs.toronto.edu/~hinton/absps/road_detection.pdf)
+      + [3](https://www.cs.toronto.edu/~vmnih/docs/Mnih_Volodymyr_PhD_Thesis.pdf)
+      + [4](https://www.cs.toronto.edu/~vmnih/data/)
+
 ### _03.02 - 03.08_
   + [slides](https://github.com/ReehcQ/satellite/blob/master/slides/0310_notes.pptx)
   + compare 4 dimensions
