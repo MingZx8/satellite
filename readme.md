@@ -2,7 +2,7 @@
 ### _03.16 - 03.22_
 + road detection
   - UofT [ssai-cnn](https://github.com/ReehcQ/satellite/blob/master/ssai-cnn.md)
-  - literature review
+  - [literature review](https://github.com/ReehcQ/satellite/blob/master/ref/0322.md)
 
 ### _03.09 - 03.15_
   + road detection
