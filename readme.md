@@ -1,4 +1,9 @@
 # Log
+### _03.16 - 03.22_
++ road detection
+  - UofT [ssai-cnn](https://github.com/ReehcQ/satellite/blob/master/ssai-cnn.md)
+  - literature review
+
 ### _03.09 - 03.15_
   + road detection
     - MIT: 
