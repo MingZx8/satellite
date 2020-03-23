@@ -1,4 +1,13 @@
 # Log
+### _03.23 - 03.29_
++ ssai-cnn
+  - comparison of different road conditions
+  - length? vehicle filter?
+  - improve?
++ OSM
+  - docker...
++ shapefile
+
 ### _03.16 - 03.22_
 + road detection
   - UofT [ssai-cnn](https://github.com/ReehcQ/satellite/blob/master/ssai-cnn.md)
