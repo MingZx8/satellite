@@ -1,4 +1,7 @@
 # Log
+### _03.30 - 04.05_
+
+
 ### _03.23 - 03.29_
 + ssai-cnn
   - comparison of different road conditions
@@ -9,7 +12,12 @@
   - [CRESI](https://github.com/avanetten/cresi)
   - docker...
 + shapefile
+  - [ontario map](https://mdl.library.utoronto.ca/collections/geospatial-data/canmap-routelogistics-ontario-13)
+  - add shapefile data to images [code](https://github.com/ReehcQ/satellite/blob/master/code/filter.py)
+    - calculate the road distance in the images
+    - to filter the road
 + traffic count for quebec
+  - [Transports Quebec](https://www.donneesquebec.ca/recherche/fr/dataset/debit-de-circulation)
 
 ### _03.16 - 03.22_
 + road detection
