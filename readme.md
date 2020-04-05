@@ -1,6 +1,12 @@
 # Log
-### _03.30 - 04.05_
+### _04.06 - 04.12_
++ 
 
+### _03.30 - 04.05_
++ road width
+  - [road width measurement](https://uwaterloo.ca/mobile-sensing/sites/ca.mobile-sensing/files/uploads/files/0000902.pdf)
+  - [line segment detection](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi)
++ email to Quebec ministry of transportation to demand the way to find AADT
 
 ### _03.23 - 03.29_
 + ssai-cnn
