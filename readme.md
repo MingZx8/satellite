@@ -4,15 +4,10 @@
 + 15min/hourly traffic count for example permanent stations [code](https://github.com/ReehcQ/satellite/blob/master/code/aadt_stat.py)  
 + 2-time underestimation
 + why cars are removed in some images, like Gardiner?
-  - There is no official response on this issue. Here are some reasonable discussions:
-  - [1](https://www.quora.com/How-did-satellite-view-in-3D-maps-remove-people-and-automobiles) 
-  - [2](https://www.reddit.com/r/Images/comments/4xuuqm/just_noticed_google_maps_is_removing_cars_from/) 
-  - [3](https://www.reddit.com/r/GoogleMaps/comments/3jo29e/where_did_all_the_cars_go_in_dfw/) 
-  - [4](https://ask.metafilter.com/35491/The-Ghosts-of-LA-live-on-the-freeway) 
-  - [5](https://www.quora.com/How-are-the-3D-models-of-buildings-generated-on-Google-Earth-Where-did-they-get-all-this-data-and-how-was-it-compiled)
-  - 1-As mentioned in Wikipedia, some satellite images are collected by aircrafts flying at 800 to 1,500 feet. The moving objects like cars are blurred under long exposure.
-  - 2-There are several snapshots on the same location for different dates (for capturing the image without clouds), and merging them by taking the statistical average of this series of photos, then the cars are removed.
-  - 3-I think it is caused by the 3D model. Because in 3D mode, the bridges are rendered, for example, [the Golden Gate bridge](https://goo.gl/maps/kvNhHpf7ZgecQam66), [Brooklyn Bridge](https://goo.gl/maps/AFyf4GrQuBTg8jWf6). So Google uses the bird's view of 3D model on 2D mode so that there is no traffic on the bridge?
+  - There is no official response on this issue. Here are some reasonable discussions: [1](https://www.quora.com/How-did-satellite-view-in-3D-maps-remove-people-and-automobiles) [2](https://www.reddit.com/r/Images/comments/4xuuqm/just_noticed_google_maps_is_removing_cars_from/) [3](https://www.reddit.com/r/GoogleMaps/comments/3jo29e/where_did_all_the_cars_go_in_dfw/) [4](https://ask.metafilter.com/35491/The-Ghosts-of-LA-live-on-the-freeway) [5](https://www.quora.com/How-are-the-3D-models-of-buildings-generated-on-Google-Earth-Where-did-they-get-all-this-data-and-how-was-it-compiled)
+  - 1-As mentioned in Wikipedia, some satellite images are collected by aircrafts flying at 800 to 1,500 feet. The moving objects like cars are blurred under long exposure.
+  - 2-There are several snapshots on the same location for different dates (for capturing the image without clouds), and merging them by taking the statistical average of this series of photos, then the cars are removed.
+  - 3-I think it is caused by the 3D model. Because in 3D mode, the bridges are rendered, for example, [the Golden Gate bridge](https://goo.gl/maps/kvNhHpf7ZgecQam66), [Brooklyn Bridge](https://goo.gl/maps/AFyf4GrQuBTg8jWf6). So Google uses the bird's view of 3D model on 2D mode so that there is no traffic on the bridge?
 + Can we avoid using the data from this kind of permanent stations?
 + Alternatively, can we use images captured on other dates when the cars are visible?
 
