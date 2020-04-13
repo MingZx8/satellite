@@ -1,4 +1,7 @@
 # Log
+### _04.13 - 04.19_
+
+
 ### _04.06 - 04.12_
 + ~~find images from 2012 to 2013~~ ~~poor quality~~  
 + 15min/hourly traffic count for example permanent stations [code](https://github.com/ReehcQ/satellite/blob/master/code/aadt_stat.py)  
@@ -10,6 +13,9 @@
   - 3-I think it is caused by the 3D model. Because in 3D mode, the bridges are rendered, for example, [the Golden Gate bridge](https://goo.gl/maps/kvNhHpf7ZgecQam66), [Brooklyn Bridge](https://goo.gl/maps/AFyf4GrQuBTg8jWf6). So Google uses the bird's view of 3D model on 2D mode so that there is no traffic on the bridge?
 + Can we avoid using the data from this kind of permanent stations?
 + Alternatively, can we use images captured on other dates when the cars are visible?
+
++ road width measurement demo
++ [download](https://github.com/ReehcQ/satellite/blob/master/code/download.py) larger size image from google maps
 
 ### _03.30 - 04.05_
 + road width
