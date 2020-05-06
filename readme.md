@@ -2,6 +2,10 @@
 ### _05.03 - 05.09_
 
 
+### _04.13 - 05.02_
++ road mask for each shapefile line in the image (1024*1024*2*19)
++ organized codes, create function to generate mask, detecte cars and count
+
 ### _04.06 - 04.12_
 + ~~find images from 2012 to 2013~~ ~~poor quality~~  
 + 15min/hourly traffic count for example permanent stations [code](https://github.com/ReehcQ/satellite/blob/master/code/aadt_stat.py)  
