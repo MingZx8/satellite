@@ -1,5 +1,8 @@
 # Log
-### _05.03 - 05.09_
+### _05.03 - 05.16_
++ generate traffic count for two size image
++ extract vehicle position in the images for speed estimation
++ data collection and data processing of BQNA project
 
 
 ### _04.13 - 05.02_
