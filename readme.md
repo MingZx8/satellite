@@ -2,8 +2,7 @@
 ### _05.03 - 05.16_
 + generate traffic count for two size image
 + extract vehicle position in the images for speed estimation
-+ data collection and data processing of BQNA project
-
+- need more points in Toronto to validate data
 
 ### _04.13 - 05.02_
 + road mask for each shapefile line in the image (1024*1024*2*19)
