@@ -1,4 +1,11 @@
 # Log
+### _06.07 - 06.13_
+17686 prediction points in Toronto
+  + download images
+  + split images into subsets (2000)
+  + detect cars in batch (split image into 1024\*1024, creat json file, detect)
+  + interpret results to each image
+
 ### _05.03 - 05.16_
 + generate traffic count for two size image
 + extract vehicle position in the images for speed estimation
