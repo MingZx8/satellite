@@ -12,7 +12,7 @@
 - need more points in Toronto to validate data
 
 ### _04.13 - 05.02_
-+ road mask for each shapefile line in the image (1024*1024*2*19)
++ road mask for each shapefile line in the image (1024\*1024\*2\*19)
 + organized codes, create function to generate mask, detecte cars and count
 
 ### _04.06 - 04.12_
