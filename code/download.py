@@ -1,4 +1,4 @@
-# Python vision: Python3.6
+# Python version: Python3.6
 # @Author: MingZZZZZZZZ
 # @Date created: 2020 Feb 13
 # @Date modified: 2020 August 10
