@@ -1,8 +1,9 @@
-# Python vision: Python3.5
+# Python version: Python3.6
 # @Author: MingZZZZZZZZ
 # @Date created: 2020
 # @Date modified: 2020
 # Description:
+
 
 import math
 
@@ -98,11 +99,12 @@ def dist_in_image(pt1, pt2, img_height, img_width):
 
     def get_length(l_min, l_max, limit):
         if l_min < 0 <= l_max:
-            length = l_max - 0 if l_max < limit else limit
+            length = l_max if l_max < limit else limit
         elif l_min < limit <= l_max:
-            length = limit - l_min if lon_min > 0 else limit
+            length = (limit - l_min) if l_min > 0 else limit
         else:
-            length = 0 if l_max < 0 or l_min > limit else l_max - l_min
+            length = 0 if (l_max < 0 or l_min > limit) else (l_max - l_min)
         return length
 
     return (get_length(lat_min, lat_max, img_height) ** 2 + get_length(lon_min, lon_max, img_width) ** 2) ** 0.5
+
