@@ -5,11 +5,10 @@
 # Description: download satellite image from google image API
 # Guide: https://developers.google.com/maps/documentation/maps-static/dev-guide
 
-import urllib, requests
+import urllib
 import pandas as pd
 import numpy as np
-import os, io
-from PIL import Image
+import os
 import cv2
 import math
 from convert import get_scale, dist2point
