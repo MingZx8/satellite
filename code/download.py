@@ -69,7 +69,6 @@ def download(latitude, longitude, width, height, zoom, scale, path_output, key=k
     :return: np.array
         img
     '''
-    global count
     # TODO: if width or height < 640
     # TODO: remove logo
     n_width = math.ceil(width / 640) // 2
