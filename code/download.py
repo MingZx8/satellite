@@ -1,9 +1,8 @@
-# Python vision: Python3.5
+# Python vision: Python3.6
 # @Author: MingZZZZZZZZ
 # @Date created: 2020 Feb 13
-# @Date modified: 2020 Feb 13
-# Description:
-# Api-key: AIzaSyC1tQUXzpoV0Wuj7E5ukEDfnLDDibbzxrg
+# @Date modified: 2020 August 10
+# Description: download satellite image from google image API
 # Guide: https://developers.google.com/maps/documentation/maps-static/dev-guide
 
 import urllib, requests
@@ -15,14 +14,14 @@ import cv2
 import math
 from convert import get_scale, dist2point
 
-key = 'AIzaSyC1tQUXzpoV0Wuj7E5ukEDfnLDDibbzxrg'
+
+key = 'AIzaSyDQh-8JKJJaWgheQIUC4nU3jI8m2xNzpkI'
 
 
-def get_url(latitude, longitude,
+def get_url(latitude, longitude, key,
             width=640, height=640,
             zoom=19,
             scale=2,
-            key=key
             ):
     # location
     center = 'center={},{}'.format(latitude, longitude)  # the center of the map
@@ -37,8 +36,9 @@ def get_url(latitude, longitude,
     # key
     key = 'key={}'.format(key)
 
-    return 'https://maps.googleapis.com/maps/api/staticmap?{}&{}&{}&{}&{}&{}&{}'.format(center, zoom, size, scale,
-                                                                                        format, maptype, key)
+    url = 'https://maps.googleapis.com/maps/api/staticmap?{}&{}&{}&{}&{}&{}&{}'.format(center, zoom, size, scale,
+                                                                                       format, maptype, key)
+    return url
 
 
 def url_to_image(url):
@@ -51,16 +51,32 @@ def url_to_image(url):
     return image
 
 
-def download(latitude, longitude, width, height, zoom, scale, path_output='/media/ming/data/google_map_imgs'):
-    if width <= 640 and height <= 640:
-        url = get_url(latitude, longitude, width, height, zoom, scale, key)
-        urllib.request.urlretrieve(url, '{}/{}*{}*{}*{}/{},{}.png'.format(
-            path_output, width, height, scale, zoom, latitude, longitude))
-        return
+def download(latitude, longitude, width, height, zoom, scale, path_output, key=key):
+    '''
+    download google maps image and write to path
+
+    :param latitude: float
+    :param longitude: float
+    :param width: int
+            >=640
+    :param height: int
+            >=640
+    :param zoom: int
+        from 1 to 22
+    :param scale: int
+        1 or 2
+    :param path_output: str
+    :param logo: bool
+    :return: np.array
+        img
+    '''
+    global count
+    # TODO: if width or height < 640
+    # TODO: remove logo
     n_width = math.ceil(width / 640) // 2
     n_height = math.ceil(height / 640) // 2
     resolution = get_scale(latitude, zoom, scale)
-    dlat, dlon = dist2point(resolution * 640, resolution * 640, latitude)
+    dlat, dlon = dist2point(resolution * 640 * scale, resolution * 640 * scale, latitude)
 
     ls_lat = [dlat * _ + latitude for _ in list(range(n_height, -n_height - 1, -1))]
     ls_lon = [dlon * _ + longitude for _ in list(range(-n_width, n_width + 1))]
@@ -70,8 +86,9 @@ def download(latitude, longitude, width, height, zoom, scale, path_output='/medi
     print('downloading...')
     ls_img = []
     for coord in ls_coordinate:
-        url = get_url(coord[0], coord[1], 640, 640, zoom, scale, key)
+        url = get_url(coord[0], coord[1], key, 640, 640, zoom, scale)
         ls_img.append(url_to_image(url))
+        count += 1
 
     print('concatenating...')
     ls_img_ver = []
@@ -79,48 +96,53 @@ def download(latitude, longitude, width, height, zoom, scale, path_output='/medi
         ls_img_ver.append(cv2.vconcat(ls_img[i * (len(ls_lat)):(i + 1) * (len(ls_lat))]))
     img = cv2.hconcat(ls_img_ver)
 
-    height_head = (640 * (n_height * 2 + 1) - height) // 2
-    width_head = (640 * (n_width * 2 + 1) - width) // 2
-    img = img[height_head: height_head + height, width_head: width_head + width]
-    if not os.path.exists('{}/{}*{}*{}*{}'.format(path_output, width, height, scale, zoom)):
-        os.mkdir('{}/{}*{}*{}*{}'.format(path_output, width, height, scale, zoom))
+    height_head = (640 * (n_height * 2 + 1) - height) // 2 * scale
+    width_head = (640 * (n_width * 2 + 1) - width) // 2 * scale
+    img = img[height_head: height_head + height * scale, width_head: width_head + width * scale]
     cv2.imwrite(
-        '{}/{}*{}*{}*{}/{},{}.png'.format(
-            path_output, width, height, scale, zoom, latitude, longitude),
+        path_output,
         img
     )
+    return img
 
 
 if __name__ == '__main__':
-    width = 1930
-    height = 650
+    width = 2048
+    height = 2048
     zoom = 19
-    scale = 1
-    latitude = 43.74006
-    longitude = -79.334
+    scale = 2
 
-    # print(get_url(latitude, longitude, width, height, zoom, scale, key))
-    download(latitude, longitude, width, height, zoom, scale)
+    neg_file = '/home/ming/Desktop/Satellite/data/ids_pred_2016_neg.txt'
+    pos_file = '/home/ming/Desktop/Satellite/data/ids_pred_2016_pos.txt'
+    coord_file = '/home/ming/Desktop/Satellite/data/coordinates.csv'
+    path = '/media/ming/data/google_map_imgs/pred'
+    df_coord = pd.read_csv(coord_file)
 
-    # path = '/home/ming/Desktop/Satellite/data/AADT example.csv'
-    # aadt = pd.read_csv(path)
-    #
-    # dst_path = '/home/ming/Desktop/Satellite/data/imgs_google_maps/{}*{}*{}*{}'.format(width, height, scale, zoom)
-    #
-    # if not os.path.exists(dst_path):
-    #     os.mkdir(dst_path)
-    #
-    # for index in aadt.index:
-    #     latitude = round(aadt.loc[index, 'y.1'], 5)
-    #     longitude = round(aadt.loc[index, 'x.1'], 4)
-    #
-    #     url = "https://maps.googleapis.com/maps/api/staticmap?{}".format(
-    #         set_params(latitude=latitude, longitude=longitude,
-    #                    width=width, height=height,
-    #                    zoom=zoom,
-    #                    scale=scale
-    #                    ))
-    #     print(url)
-    #
-    #     urllib.request.urlretrieve(url,
-    #                                '{}/{},{}.png'.format(dst_path, latitude, longitude))
+    neg_ls = []
+    with open(neg_file, 'r') as f:
+        for line in f.readlines():
+            neg_ls.append(int(line))
+
+    pos_ls = []
+    with open(pos_file, 'r') as f:
+        for line in f.readlines():
+            pos_ls.append(int(line))
+
+    point_ls = list(set(neg_ls + pos_ls))
+
+    df_coord['neg'] = df_coord['centreline'].isin(neg_ls)
+    df_coord['pos'] = df_coord['centreline'].isin(pos_ls)
+    df_coord = df_coord[df_coord['neg'] | df_coord['pos']]
+
+    df_coord.sort_values('centreline', inplace=True)
+    for index in df_coord.index[:3600]:
+        lat, lon = df_coord.loc[index, 'lat'], df_coord.loc[index, 'lon']
+        centreline = df_coord.loc[index, 'centreline']
+        output = os.path.join(path, str(centreline))
+        print('centreline: ', centreline)
+        if not os.path.exists(output):
+            os.mkdir(output)
+        if not os.path.exists(output + '/image.png'):
+            download(
+                lat, lon, width, height, zoom, scale, output + '/image.png', key=key
+            )
