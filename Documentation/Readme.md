@@ -12,6 +12,8 @@ There are four main features regarding image size and resolution: **width**, **h
 Details about the API parameters are availble on the [developer guide](https://developers.google.com/maps/documentation/maps-static/start) page.  
     
 The largest size of image that the API provided is 640*640, so this function gives a method to concatenate small size images.
+
+![1024*1024*19*2](https://github.com/ReehcQ/satellite/blob/master/imgs/image.png)  
   
 The satellite images with high resolution is always available for main city like Toronto.  
 In a few part of Quebec, only low quality images or even no image are provided by Google Maps.
@@ -30,3 +32,23 @@ download(43.6659008, -79.3928523, 2048, 2048, 2, 19, '\path', 'APIkey')
 # Vehicle Detection
 
 # Road Segmentation
+The approach to detect road is purposed by [Xia et al., 2017](https://ieeexplore.ieee.org/document/8127098).   
+Here are the steps:
+#### Step 1. Line segment detection
+![step 1](https://github.com/ReehcQ/satellite/blob/master/imgs/step1.png)
+[Line Segment Detector](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) is used to detect line segment (straight contour) in the image.    
+Download the code and save it to your *\<LSD path>*.
+
+## [Code]()
+
+#### Step 2. Select area according to the Geospatial data
+
+#### Step 3. Filter line segments
+
+#### Step 4. Find out pairs
+
+#### Step 5. Cluster
+
+#### Step 6. Build road mask and recognize route direction
+
+# Reference
