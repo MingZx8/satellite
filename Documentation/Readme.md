@@ -23,7 +23,7 @@ Replace the variable `key` with your API key.
 Use the function `download` to download satellite image.  
 
 ```
-download(43.6659008, -79.3928523, 2048, 2048, 2, 19, '\path', 'APIkey')
+download(43.6659008, -79.3928523, 2048, 2048, 2, 19, <output path>, <APIkey>)
 ```
   
 ###### So far, this function does not support neither the width nor the height of the image is smaller than 640
@@ -37,9 +37,12 @@ Here are the steps:
 #### Step 1. Line segment detection
 ![step 1](https://github.com/ReehcQ/satellite/blob/master/imgs/step1.png)
 [Line Segment Detector](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) is used to detect line segment (straight contour) in the image.    
-Download the code and save it to your *\<LSD path>*.
 
-## [Code]()
+## [Code](https://github.com/ReehcQ/satellite/blob/master/code/generateLSD.py)
+Download the code and save it to your *\<LSD path>*.
+```
+generate(<img.jpg>, <output_folder_path>, <LSD path>)
+```
 
 #### Step 2. Select area according to the Geospatial data
 
