@@ -1,6 +1,33 @@
 # Overview
+This project is purposed to detect and **count traffic** in the **satellite images** in order to estimate AADT for road segments. Compared to traditional manual methods of traffic collection, this approach is more efficient and economic.  
+  
+The approach consists of three main steps: 
++ Image preparation
++ Vehicle detection
++ Road segmentation
+  
+This documentation covers the requirements for each step, the basic instructions to get detection from a satellite image, and the details of each step if processing in batch is needed.
+  
+# Prerequisite
+This project has been tested on the following dependencies:
+  
+#### overall
++ [Python](https://www.python.org/) 3.6
+#### Image preparation
++ [urllib3](https://urllib3.readthedocs.io/en/latest/)
+#### Vehicle detection
++ Linux ([Ubuntu](https://ubuntu.com/) 18.04)
++ [CUDA 10.0](https://developer.nvidia.com/cuda-10.0-download-archive)
++ [GCC](https://gcc.gnu.org/) 7.5.0
++ [Pytorch](https://pytorch.org/) 1.3.1
++ [AerialDetection](https://github.com/dingjiansw101/AerialDetection/blob/master/INSTALL.md)
+#### Road segmentation
++ [LSD](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) (Line segment detection)
++ Geospatial data (such as shapefile)
+  
 
 # Get Started
+
 
 # Image Preparation
 This project uses [Google Maps API](https://cloud.google.com/maps-platform/) to download high-resolution satellite images.  
@@ -30,6 +57,7 @@ download(43.6659008, -79.3928523, 2048, 2048, 2, 19, <output path>, <APIkey>)
 
 
 # Vehicle Detection
+
 
 # Road Segmentation
 The approach to detect road is purposed by [Xia et al., 2017](https://ieeexplore.ieee.org/document/8127098).   
