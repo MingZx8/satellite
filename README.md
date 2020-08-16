@@ -15,6 +15,7 @@ This project has been tested on the following dependencies:
 + [Python](https://www.python.org/) 3.6
 #### Image preparation
 + [urllib3](https://urllib3.readthedocs.io/en/latest/)
++ [opencv-python](https://pypi.org/project/opencv-python/)
 #### Vehicle detection
 + Linux ([Ubuntu](https://ubuntu.com/) 18.04)
 + [CUDA 10.0](https://developer.nvidia.com/cuda-10.0-download-archive)
@@ -73,8 +74,8 @@ generate(<img.jpg>, <output_folder_path>, <LSD path>)
 ```
 
 #### Step 2. Select area according to the Geospatial data
-
-
+![step 2](https://github.com/ReehcQ/satellite/blob/master/imgs/step2.png)
+Since 
 
 #### Step 3. Filter line segments
 
