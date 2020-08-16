@@ -2,9 +2,9 @@
 This project is purposed to detect and **count traffic** in the **satellite images** in order to estimate AADT for road segments. Compared to traditional manual methods of traffic collection, this approach is more efficient and economic.  
   
 The approach consists of three main steps: 
-+ Image preparation
-+ Vehicle detection
-+ Road segmentation
++ [Image preparation](https://github.com/ReehcQ/satellite#image-preparation-1)
++ [Vehicle detection](https://github.com/ReehcQ/satellite#vehicle-detection-1)
++ [Road segmentation](https://github.com/ReehcQ/satellite#road-segmentation-1)
   
 This documentation covers the requirements for each step, the basic instructions to get detection from a satellite image, and the details of each step if processing in batch is needed.
   
@@ -25,6 +25,9 @@ This project has been tested on the following dependencies:
 #### Road segmentation
 + [LSD](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) (Line segment detection)
 + Geospatial data (such as shapefile)
++ [shapely](https://pypi.org/project/Shapely/)
++ [scikit-learn](https://scikit-learn.org/stable/)
+
   
 
 # Get Started
@@ -61,7 +64,8 @@ download(43.6659008, -79.3928523, 2048, 2048, 2, 19, <output path>, <APIkey>)
 
 
 # Road Segmentation
-The approach to detect road is purposed by [Xia et al., 2017](https://ieeexplore.ieee.org/document/8127098).   
+The approach to mesure road width is purposed by [Xia et al., 2017](https://ieeexplore.ieee.org/document/8127098).   
+From the geospatial data, road type and road centerline are determined. A road mask is built based on the road width and centerline.  
 Here are the steps:
 #### Step 1. Line segment detection
 ![step 1](https://github.com/ReehcQ/satellite/blob/master/imgs/step1.png)
@@ -72,17 +76,34 @@ Download the code and save it to your *\<LSD path>*.
 ```
 generate(<img.jpg>, <output_folder_path>, <LSD path>)
 ```
-
+  
 #### Step 2. Select area according to the Geospatial data
-![step 2](https://github.com/ReehcQ/satellite/blob/master/imgs/step2.png)
-Since 
-
+![step 2](https://github.com/ReehcQ/satellite/blob/master/imgs/step2.png)  
+In this project, geographical information is used to determine the road centerline.  
+The default width is given according to the type of road.  
+Avoiding overlapping other road is considered. 
+Only line segments in this area will be paired.  
+  
 #### Step 3. Filter line segments
-
+![step 3](https://github.com/ReehcQ/satellite/blob/master/imgs/step3.png)  
+We filter out line segment out of the selected area and its length should be larger than a selected length.  
+  
 #### Step 4. Find out pairs
-
+![step 4](https://github.com/ReehcQ/satellite/blob/master/imgs/step4.png)  
+We calculate overlap ratio for all segment pairs and keep that whose overlap ratio is larger than 0.2.  
+*Overlap ratio:*
++ *sample target segment at fixed step, the number of sample points is m*
++ *draw lines perpendicular to candidate line (where candidate segment located in), over sample point on the target segment*
++ *count the perpendicular lines across the candidate segment, n*
++ *overlap ratio is n/m*  
+![step 4-2](https://github.com/ReehcQ/satellite/blob/master/imgs/step4-2.png)  
+  
 #### Step 5. Cluster
-
+![step 5](https://github.com/ReehcQ/satellite/blob/master/imgs/step5.png)  
+We can get a road width estimation using k-mean clustering method.  
+  
 #### Step 6. Build road mask and recognize route direction
+![step 6](https://github.com/ReehcQ/satellite/blob/master/imgs/step6.png) 
+  
 
 # Reference
