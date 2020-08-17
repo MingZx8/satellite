@@ -13,15 +13,17 @@ This project has been tested on the following dependencies:
   
 #### overall
 + [Python](https://www.python.org/) 3.6
++ [opencv-python](https://pypi.org/project/opencv-python/)
 #### Image preparation
 + [urllib3](https://urllib3.readthedocs.io/en/latest/)
-+ [opencv-python](https://pypi.org/project/opencv-python/)
 #### Vehicle detection
 + Linux ([Ubuntu](https://ubuntu.com/) 18.04)
 + [CUDA 10.0](https://developer.nvidia.com/cuda-10.0-download-archive)
 + [GCC](https://gcc.gnu.org/) 7.5.0
 + [Pytorch](https://pytorch.org/) 1.3.1
 + [AerialDetection](https://github.com/dingjiansw101/AerialDetection/blob/master/INSTALL.md)
++ [NN model](https://drive.google.com/drive/folders/1VYygIQNSsXr8Ij5B9GjqsKbNMjLuMG-x)
++ [shapely](https://pypi.org/project/Shapely/)
 #### Road segmentation
 + [LSD](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) (Line segment detection)
 + Geospatial data (such as shapefile)
@@ -32,7 +34,7 @@ This project has been tested on the following dependencies:
 
 # Get Started
 
-
+  
 # Image Preparation
 This project uses [Google Maps API](https://cloud.google.com/maps-platform/) to download high-resolution satellite images.  
 First of all, you need an **API key** to get the authentation, here is the [instruction](https://developers.google.com/maps/gmp-get-started).  
@@ -44,7 +46,7 @@ Details about the API parameters are availble on the [developer guide](https://d
     
 The largest size of image that the API provided is 640*640, so this function gives a method to concatenate small size images.
 
-![1024*1024*19*2](https://github.com/ReehcQ/satellite/blob/master/imgs/image.png)  
+![1024\*1024\*19\*2](https://github.com/ReehcQ/satellite/blob/master/imgs/image.png)  
   
 The satellite images with high resolution is always available for main city like Toronto.  
 In a few part of Quebec, only low quality images or even no image are provided by Google Maps.
@@ -59,10 +61,35 @@ download(43.6659008, -79.3928523, 2048, 2048, 2, 19, <output path>, <APIkey>)
   
 ###### So far, this function does not support neither the width nor the height of the image is smaller than 640
 
-
+  
 # Vehicle Detection
-
-
+## [Code](https://github.com/ReehcQ/satellite/blob/master/code/detect_vehicle.py)
+This process includes four steps:  
+### Split image
+The image will be split into 1024\*1024, and it will generate a .json file including split img name and its features such as size.  
+```
+split_img()
+```
+  
+### Detect vehicles
+In order to customize input file path, replace the file <../AerialDetection/tools/test.py> with [this python file](https://github.com/ReehcQ/satellite/blob/master/code/test.py).  
+```
+detect_car()
+```
+  
+### Output results
+The previous step gives a .pkl file. We will convert it into a DataFrame.
+```
+pkl2csv()
+```
+  
+### Merge results
+Since the original image was split into several 1024\*1024 images, we need to concatenate these images together and merge the detection results. 
+```
+merge()
+```
+You can use main() function to run these processes in a serie.
+  
 # Road Segmentation
 The approach to mesure road width is purposed by [Xia et al., 2017](https://ieeexplore.ieee.org/document/8127098).   
 From the geospatial data, road type and road centerline are determined. A road mask is built based on the road width and centerline.  
@@ -105,5 +132,7 @@ We can get a road width estimation using k-mean clustering method.
 #### Step 6. Build road mask and recognize route direction
 ![step 6](https://github.com/ReehcQ/satellite/blob/master/imgs/step6.png) 
   
+## [Code](https://github.com/ReehcQ/satellite/blob/master/code/road_mask.py)
+
 
 # Reference
