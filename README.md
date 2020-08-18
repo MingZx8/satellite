@@ -14,6 +14,7 @@ This project has been tested on the following dependencies:
 #### overall
 + [Python](https://www.python.org/) 3.6
 + [opencv-python](https://pypi.org/project/opencv-python/)
++ [shapely](https://pypi.org/project/Shapely/)
 #### Image preparation
 + [urllib3](https://urllib3.readthedocs.io/en/latest/)
 #### Vehicle detection
@@ -23,11 +24,9 @@ This project has been tested on the following dependencies:
 + [Pytorch](https://pytorch.org/) 1.3.1
 + [AerialDetection](https://github.com/dingjiansw101/AerialDetection/blob/master/INSTALL.md)
 + [NN model](https://drive.google.com/drive/folders/1VYygIQNSsXr8Ij5B9GjqsKbNMjLuMG-x)
-+ [shapely](https://pypi.org/project/Shapely/)
 #### Road segmentation
 + [LSD](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) (Line segment detection)
 + Geospatial data (such as shapefile)
-+ [shapely](https://pypi.org/project/Shapely/)
 + [scikit-learn](https://scikit-learn.org/stable/)
 
   
@@ -56,7 +55,7 @@ Replace the variable `key` with your API key.
 Use the function `download` to download satellite image.  
 
 ```
-download(43.6659008, -79.3928523, 2048, 2048, 2, 19, <output path>, <APIkey>)
+download(43.6659008, -79.3928523, 2048, 2048, 2, 19, <output directory>, <APIkey>, <--optional file name >)
 ```
   
 ###### So far, this function does not support neither the width nor the height of the image is smaller than 640
@@ -68,27 +67,27 @@ This process includes four steps:
 ### Split image
 The image will be split into 1024\*1024, and it will generate a .json file including split img name and its features such as size.  
 ```
-split_img()
+split_img(<file path>)
 ```
   
 ### Detect vehicles
 In order to customize input file path, replace the file <../AerialDetection/tools/test.py> with [this python file](https://github.com/ReehcQ/satellite/blob/master/code/test.py).  
 ```
-detect_car()
+detect_car(<file path>)
 ```
   
 ### Output results
 The previous step gives a .pkl file. We will convert it into a DataFrame.
 ```
-pkl2csv()
+pkl2csv(<file path>)
 ```
   
 ### Merge results
 Since the original image was split into several 1024\*1024 images, we need to concatenate these images together and merge the detection results. 
 ```
-merge()
+merge(<file path>, <--optional bool show_img>)
 ```
-You can use main() function to run these processes in a serie.
+You can use `main(<file path>, <--optional bool show_img>)` function to run these processes in a serie.
   
 # Road Segmentation
 The approach to mesure road width is purposed by [Xia et al., 2017](https://ieeexplore.ieee.org/document/8127098).   
@@ -99,7 +98,7 @@ Here are the steps:
 [Line Segment Detector](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) is used to detect line segment (straight contour) in the image.    
 
 ## [Code](https://github.com/ReehcQ/satellite/blob/master/code/generateLSD.py)
-Download the code and save it to your *\<LSD path>*.
+Download the above-mentioned [tool]((http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi)) and save it to your *\<LSD path>*.
 ```
 generate(<img.jpg>, <output_folder_path>, <LSD path>)
 ```
