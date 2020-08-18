@@ -98,9 +98,9 @@ Here are the steps:
 [Line Segment Detector](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) is used to detect line segment (straight contour) in the image.    
 
 ## [Code](https://github.com/ReehcQ/satellite/blob/master/code/generateLSD.py)
-Download the above-mentioned [tool]((http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi)) and save it to your *\<LSD path>*.
+Download the above-mentioned [tool](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) and save it to your *\<LSD path>*.
 ```
-generate(<img.jpg>, <output_folder_path>, <LSD path>)
+generate(<file path>, <LSD path>)
 ```
   
 #### Step 2. Select area according to the Geospatial data
