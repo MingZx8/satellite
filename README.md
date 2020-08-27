@@ -6,7 +6,7 @@ The approach consists of three main steps:
 + [Vehicle detection](https://github.com/ReehcQ/satellite#vehicle-detection-1)
 + [Road segmentation](https://github.com/ReehcQ/satellite#road-segmentation-1)
   
-This documentation covers the requirements for each step, the basic instructions to get detection from a satellite image, and the details of each step if processing in batch is needed.
+This documentation covers the requirements for each step, the basic instructions to get detection from a satellite image, and the details for each step if processing in batch is needed.
   
 # Prerequisite
 This project has been tested on the following dependencies:
@@ -32,6 +32,7 @@ This project has been tested on the following dependencies:
   
 
 # Get Started
+
 
   
 # Image Preparation
