@@ -11,7 +11,6 @@ from shapely import wkt
 import math
 import numpy as np
 import cv2
-import matplotlib.pyplot as plt
 import difflib
 import os
 from sklearn.cluster import KMeans
@@ -124,34 +123,53 @@ def string_similar(s1, s2):
     return difflib.SequenceMatcher(None, s1, s2).quick_ratio()
 
 
-def main(latitude, longitude,
-         img_scale='1024*1024*2*19',
-         show_selected_area=False,
-         show_filtered_segment=False,
-         show_paired_segment=False,
-         show_mask=False,
-         validate=False,
-         centreline_label=None,
-         path='/media/ming/data/google_map_imgs',
-         geo_path='/media/ming/data/GeospecialData/ONrte',
-         gdf_all=None
-         ):
+def main(
+        file_path,
+        latitude,
+        longitude,
+        show_selected_area=False,
+        show_filtered_segment=False,
+        show_paired_segment=False,
+        show_mask=False,
+        geo_file='/media/ming/data/GeospecialData/ONrte/ONrte.shp'
+):
+    '''
+    :param file_path: str
+    :param latitude: float
+    :param longitude: float
+    :param show_selected_area: boolean
+    :param show_filtered_segment: boolean
+    :param show_paired_segment: boolean
+    :param show_mask: boolean
+    :param centreline_label: str
+        the label name of the road
+    :param path: str
+        where the files are located
+    :param geo_file: str
+        where the geospatial data is located
+    :return: pandas.Dataframe
+        inludes road width, road length and road mask in form shapely.geometry.Polygon
+    '''
+
     resolution = get_scale(latitude)
     # file loading#################################################################################
-    file_name = '{}'.format(centreline_label) if centreline_label else '{},{}'.format(latitude, longitude)
-    file_path = '{}/{}/{}'.format(path, img_scale, file_name)
-    img_name = '{}/image/image.png'.format(file_path)
-    geo_name = '{}/ONrte.shp'.format(geo_path)
+    file_name = file_path.split('/')[-1]
+    img_file = '{}/image/image.png'.format(file_path)
+    geo_path = os.path.join('/'.join(file_path.split('/')[:-1]), 'SubGeoFolder')
+    try:
+        os.mkdir(geo_path)
+    except FileExistsError:
+        pass
     geo_selected_name = '{}/{}'.format(geo_path, file_name)
     geo_line_name = '{}/line.csv'.format(file_path)
     line_name = '{}/lsd.txt'.format(file_path)
-    geo_file = '{}/{}/{}/geo_val.csv'.format(path, img_scale, file_name) if validate else \
-        '{}/{}/{}/geo.csv'.format(path, img_scale, file_name)
+    geo_selected_file = '{}/geo_val.csv'.format(file_path)
 
+    # initiate a fake polygon, in order to fill the dataframe with the same format data
     default_polygon = Polygon([(0, 0), (0, 0), (0, 0)])
 
     # load image
-    img = cv2.imread(img_name)
+    img = cv2.imread(img_file)
     img_mask = img.copy()
     img_width = img.shape[1]
     img_height = img.shape[0]
@@ -159,9 +177,9 @@ def main(latitude, longitude,
     # generate lsd file
     if not os.path.exists(line_name):
         print('generate line segment...')
-        generate(latitude, longitude, img_scale, centreline_label=centreline_label, path=path)
+        generate(file_path)
 
-    # build line segment dataframe
+    # build line segment dataframe###################################################
     df_segment = pd.read_csv(line_name, sep=' ', header=None).rename(
         columns=dict(enumerate(['x1', 'y1', 'x2', 'y2', 'width', 'p', '-log_nfa']))).drop(columns=7)
     df_segment['slope'] = (df_segment.y2 - df_segment.y1) / (df_segment.x2 - df_segment.x1)
@@ -188,14 +206,14 @@ def main(latitude, longitude,
         try:
             gdf.set_index('flag', inplace=True)
         except KeyError:
-            gdf = gdf_all if gdf_all else gpd.read_file(geo_name)
+            gdf = gpd.read_file(geo_selected_file)
             point = Point(longitude, latitude).buffer(0.01)
             gdf['selected'] = gdf.geometry.apply(point.intersects)
             gdf = gdf[gdf.selected]
             gdf['flag'] = gdf.index
             gdf.to_file(geo_selected_name)
     else:
-        gdf = gpd.read_file(geo_name) if isinstance(gdf_all, type(None)) else gdf_all
+        gdf = gpd.read_file(geo_file)
         point = Point(longitude, latitude).buffer(0.01)
         gdf['selected'] = gdf.geometry.apply(point.intersects)
         gdf = gdf[gdf.selected]
@@ -208,7 +226,7 @@ def main(latitude, longitude,
             gdf.to_file(geo_selected_name)
     print('done')
 
-    ############################################################################################
+    # ############################################################################################
     # get 1. fixed distance
     # 2. depends on nearby shapefile line
     # display all lines in the image
@@ -229,31 +247,28 @@ def main(latitude, longitude,
     if gdf_line.empty:
         return
 
-    # if validate, choose the nearest line to the centre point
-    if validate:
-        nearest_index = get_geo_index(Point(longitude, latitude), gdf_line)
-        gdf_line_selected = gdf_line[gdf_line['STREETNAME'] == gdf_line.loc[nearest_index, 'STREETNAME']]
-        index_ls = gdf_line_selected.index.to_list()
-        index_ls.remove(nearest_index)
-        nearest_line_ls = [nearest_index]
-        len_tmp = len(nearest_line_ls)
-        head = gdf_line_selected.loc[nearest_index, 'FROMNODE']
-        tail = gdf_line_selected.loc[nearest_index, 'TONODE']
-        node_ls = [head, tail]
-        while len(nearest_line_ls) == len_tmp:
-            len_tmp += 1
-            for i in index_ls:
-                head = gdf_line_selected.loc[i, 'FROMNODE']
-                tail = gdf_line_selected.loc[i, 'TONODE']
-                if head in node_ls or tail in node_ls:
-                    nearest_line_ls.append(i)
-                    index_ls.remove(i)
-                    node_ls.append(head)
-                    node_ls.append(tail)
-                    break
-        gdf_line_selected = gdf_line_selected.loc[nearest_line_ls, :]
-    else:
-        gdf_line_selected = gdf_line
+    # ichoose the nearest line to the centre point
+    nearest_index = get_geo_index(Point(longitude, latitude), gdf_line)
+    gdf_line_selected = gdf_line[gdf_line['STREETNAME'] == gdf_line.loc[nearest_index, 'STREETNAME']]
+    index_ls = gdf_line_selected.index.to_list()
+    index_ls.remove(nearest_index)
+    nearest_line_ls = [nearest_index]
+    len_tmp = len(nearest_line_ls)
+    head = gdf_line_selected.loc[nearest_index, 'FROMNODE']
+    tail = gdf_line_selected.loc[nearest_index, 'TONODE']
+    node_ls = [head, tail]
+    while len(nearest_line_ls) == len_tmp:
+        len_tmp += 1
+        for i in index_ls:
+            head = gdf_line_selected.loc[i, 'FROMNODE']
+            tail = gdf_line_selected.loc[i, 'TONODE']
+            if head in node_ls or tail in node_ls:
+                nearest_line_ls.append(i)
+                index_ls.remove(i)
+                node_ls.append(head)
+                node_ls.append(tail)
+                break
+    gdf_line_selected = gdf_line_selected.loc[nearest_line_ls, :]
 
     # creating center lines for all gdf_line
     center_line_dict = {}
@@ -382,7 +397,7 @@ def main(latitude, longitude,
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
 
-            ###############################################################################################
+    #         ###############################################################################################
             print('pairing segments...')
             # pair by slope
 
@@ -691,55 +706,11 @@ def main(latitude, longitude,
     )
     img_mask = cv2.resize(img_mask, (1024, 1024), interpolation=cv2.INTER_CUBIC)
     cv2.imwrite(os.path.join(file_path, 'mask.png'), img_mask)
-    # cv2.imshow(' ', img_mask)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
-    #
-    # gdf_line.geometry = gdf_line.geometry.apply(lambda x: Polygon([(0, 0), (0, 0), (0, 0)]) if type(x) == LineString else x)
-    # gdf_line_geo = gpd.GeoDataFrame(
-    #     gdf_line, geometry='geometry'
-    # )
 
-    gdf_line.to_csv(geo_file)
+    gdf_line.to_csv(geo_selected_file)
     return gdf_line
 
 
 if __name__ == '__main__':
-    # parameters
-    # latitude, longitude = 43.72101, -79.3296  # highway
-    # latitude, longitude = 43.7415, -79.3304  # curve ramp
-    # latitude, longitude = 43.63792, -79.4627  # highway
-    # latitude, longitude = 43.63881, -79.4566  # highway 和上一个类似
-    # latitude, longitude = 43.63111, -79.4289  # lake shore
-    # latitude, longitude = 43.63164, -79.4317  # lake shore & gardiner
-    # latitude, longitude = 43.63247, -79.43  # highway
-    # latitude, longitude = 43.63319, -79.4097  # major road, 《curve》
-    # latitude, longitude = 43.63545, -79.4416  # highway
-    # latitude, longitude = 43.65912, -79.3544  # DVP, 《有带树小路》
-    # latitude, longitude = 43.70924, -79.3343  # main road
-    # latitude, longitude = 43.71699, -79.3267  # highway <树小路>
-    # latitude, longitude = 43.72863, -79.3306  # highway
-    # latitude, longitude = 43.74006, -79.334  # 环岛
-    # latitude, longitude = 43.75289, -79.363  # 有树大路
-    # latitude, longitude = 43.63606, -79.401  # bathurst-lakeshore <带树小路， doubleway>
-    # latitude, longitude = 43.6485, -79.3588  # gardiner
-    # latitude, longitude = 43.64095, -79.3822  # gardiner
-    # latitude, longitude = 43.64265, -79.3788  # gardiner
-    # latitude, longitude = 43.68652, -79.3347  # main road
-    #################################################################
-    # latitude, longitude = 43.6458, -79.3695  # gardiner
-    # latitude, longitude = 43.63032, -79.4204  # 效果不好的特例 lakeshore
-    latitude, longitude = 43.63736, -79.4096  # gardiner
-    # latitude, longitude = 43.63903, -79.3898  # gardiner? 是不是桥阿
-    # latitude, longitude = 43.63996, -79.3845  # gardiner
-    # latitude, longitude = 43.64857, -79.3589  # gardiner
-    # latitude, longitude = 43.77303, -79.443  # main road, 还行
-    # latitude, longitude = 43.78293, -79.2664  # main road
-    # latitude, longitude = 43.79427, -79.2393  # main road
-    main(latitude, longitude,
-         img_scale='2048*2048*2*19',
-         show_filtered_segment=False,
-         show_paired_segment=False,
-         show_selected_area=False,
-         show_mask=True
-         )
+    main('/home/ming/Desktop/Satellite/code/output/1', 43.668581, -79.394941)
+

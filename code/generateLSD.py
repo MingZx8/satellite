@@ -23,42 +23,27 @@ def png2tiff(path, path_dest):
 def png2pgm(input, output):
     img = Image.open(input)
     img = img.convert('L')
-    print(img.size)
-    # img = img.resize(img.size, Image.BILINEAR)
     img.save(
         output
     )
 
 
 def generate(
-        img_path='/media/ming/data/google_map_imgs/image/image.png',
-        output_path='/media/ming/data/google_map_imgs/',
+        file_path,
         exe='/home/ming/Desktop/Satellite/code/lsd_1.6/lsd',
 ):
-    output = '{}/lsd.pgm'.format(output_path)
+    print('detecting line segments...')
+    img_path = os.path.join(file_path, 'image', 'image.png')
+    output = '{}/lsd.pgm'.format(file_path)
     png2pgm(img_path, output)
 
-    result = '{}/lsd.txt'.format(output_path)
+    result = '{}/lsd.txt'.format(file_path)
     os.system(
         '{} {} {}'.format(exe, output, result)
     )
-
-
-# def generate(lat, lon, img_scale,
-#              path='/media/ming/data/google_map_imgs',
-#              exe='/home/ming/Desktop/Satellite/code/lsd_1.6/lsd',
-#              centreline_label=None):
-#     file_name = '{}'.format(centreline_label) if centreline_label else '{},{}'.format(lat, lon)
-#     input = '{}/{}/{}/image/image.png'.format(path, img_scale, file_name)
-#     output = '{}/{}/{}/lsd.pgm'.format(path, img_scale, file_name)
-#     png2pgm(input, output)
-#
-#     result = '{}/{}/{}/lsd.txt'.format(path, img_scale, file_name)
-#     os.system(
-#         '{} {} {}'.format(exe, output, result)
-#     )
+    os.remove(output)
 
 
 if __name__ == '__main__':
-    latitude, longitude = 43.79427, -79.2393
-    generate()
+    file_path = '/home/ming/Desktop/Satellite/code/output/43.668581,-79.394941'
+    generate(file_path)

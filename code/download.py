@@ -6,15 +6,13 @@
 # Guide: https://developers.google.com/maps/documentation/maps-static/dev-guide
 
 import urllib
-import pandas as pd
 import numpy as np
 import os
 import cv2
 import math
 from convert import get_scale, dist2point
 
-
-key = 'AIzaSyDQh-8JKJJaWgheQIUC4nU3jI8m2xNzpkI'
+key = 'AIzaSyBYl7ex9kviiTW3cJvvmlMFWDbrKQAqZe0'
 
 
 def get_url(latitude, longitude, key,
@@ -50,27 +48,39 @@ def url_to_image(url):
     return image
 
 
-def download(latitude, longitude, width, height, zoom, scale, path_output, key=key):
+def download(latitude, longitude, width, height, zoom, scale, output_path,
+             key=key, centreline_label=''):
     '''
     download google maps image and write to path
 
     :param latitude: float
     :param longitude: float
     :param width: int
-            >=640
     :param height: int
-            >=640
     :param zoom: int
         from 1 to 22
     :param scale: int
         1 or 2
     :param path_output: str
-    :param logo: bool
+    :key str
+        optional, google map api key
+    :centreline_label str
+        optional, by default, the file path is set as 'lat, lon', it will be named as given
     :return: np.array
         img
     '''
     # TODO: if width or height < 640
     # TODO: remove logo
+    img_path = centreline_label if centreline_label else '{},{}'.format(latitude, longitude)
+    try:
+        os.mkdir(os.path.join(output_path, img_path))
+    except FileExistsError:
+        pass
+    try:
+        os.mkdir(os.path.join(output_path, img_path, 'image'))
+    except FileExistsError:
+        pass
+    output_path = os.path.join(output_path, img_path, 'image', 'image.png')
     n_width = math.ceil(width / 640) // 2
     n_height = math.ceil(height / 640) // 2
     resolution = get_scale(latitude, zoom, scale)
@@ -80,13 +90,12 @@ def download(latitude, longitude, width, height, zoom, scale, path_output, key=k
     ls_lon = [dlon * _ + longitude for _ in list(range(-n_width, n_width + 1))]
     ls_coordinate = list(zip(ls_lat * len(ls_lon), sorted(ls_lon * len(ls_lat))))
 
-    print('{}, {}'.format(latitude, longitude))
+    print('coordinate: {}, {}'.format(latitude, longitude))
     print('downloading...')
     ls_img = []
     for coord in ls_coordinate:
         url = get_url(coord[0], coord[1], key, 640, 640, zoom, scale)
         ls_img.append(url_to_image(url))
-        count += 1
 
     print('concatenating...')
     ls_img_ver = []
@@ -98,49 +107,12 @@ def download(latitude, longitude, width, height, zoom, scale, path_output, key=k
     width_head = (640 * (n_width * 2 + 1) - width) // 2 * scale
     img = img[height_head: height_head + height * scale, width_head: width_head + width * scale]
     cv2.imwrite(
-        path_output,
+        output_path,
         img
     )
+    print('done.')
     return img
 
 
 if __name__ == '__main__':
-    width = 2048
-    height = 2048
-    zoom = 19
-    scale = 2
-
-    neg_file = '/home/ming/Desktop/Satellite/data/ids_pred_2016_neg.txt'
-    pos_file = '/home/ming/Desktop/Satellite/data/ids_pred_2016_pos.txt'
-    coord_file = '/home/ming/Desktop/Satellite/data/coordinates.csv'
-    path = '/media/ming/data/google_map_imgs/pred'
-    df_coord = pd.read_csv(coord_file)
-
-    neg_ls = []
-    with open(neg_file, 'r') as f:
-        for line in f.readlines():
-            neg_ls.append(int(line))
-
-    pos_ls = []
-    with open(pos_file, 'r') as f:
-        for line in f.readlines():
-            pos_ls.append(int(line))
-
-    point_ls = list(set(neg_ls + pos_ls))
-
-    df_coord['neg'] = df_coord['centreline'].isin(neg_ls)
-    df_coord['pos'] = df_coord['centreline'].isin(pos_ls)
-    df_coord = df_coord[df_coord['neg'] | df_coord['pos']]
-
-    df_coord.sort_values('centreline', inplace=True)
-    for index in df_coord.index[:3600]:
-        lat, lon = df_coord.loc[index, 'lat'], df_coord.loc[index, 'lon']
-        centreline = df_coord.loc[index, 'centreline']
-        output = os.path.join(path, str(centreline))
-        print('centreline: ', centreline)
-        if not os.path.exists(output):
-            os.mkdir(output)
-        if not os.path.exists(output + '/image.png'):
-            download(
-                lat, lon, width, height, zoom, scale, output + '/image.png', key=key
-            )
+    download(43.668581, -79.394941, 2048, 1024, 19, 2, output_path='/home/ming/Desktop/Satellite/code/output')
