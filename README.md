@@ -17,6 +17,7 @@ This project has been tested on the following dependencies:
 + [shapely](https://pypi.org/project/Shapely/)
 #### Image preparation
 + [urllib3](https://urllib3.readthedocs.io/en/latest/)
++ [Google Maps API](https://cloud.google.com/maps-platform/)
 #### Vehicle detection
 + Linux ([Ubuntu](https://ubuntu.com/) 18.04)
 + [CUDA 10.0](https://developer.nvidia.com/cuda-10.0-download-archive)
@@ -26,19 +27,61 @@ This project has been tested on the following dependencies:
 + [NN model](https://drive.google.com/drive/folders/1VYygIQNSsXr8Ij5B9GjqsKbNMjLuMG-x)
 #### Road segmentation
 + [LSD](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) (Line segment detection)
-+ Geospatial data (such as shapefile)
++ Geospatial data: 
+  - [Ontario](https://mdl.library.utoronto.ca/collections/geospatial-data/canmap-routelogistics-ontario-5)
+  - [Quebec](https://mdl.library.utoronto.ca/collections/geospatial-data/canmap-routelogistics-quebec-3) 
+  - (please find '*all road files directions speed limits travel time*')
 + [scikit-learn](https://scikit-learn.org/stable/)
 
   
 
 # Get Started
+### Preparation
+Please check first if you have:
++ Linux
++ python 3.6
++ [CUDA 10.0](https://developer.nvidia.com/cuda-10.0-download-archive)
++ [GCC](https://gcc.gnu.org/) 7.5.0
++ [Pytorch](https://pytorch.org/) 1.3.1
++ [opencv-python](https://pypi.org/project/opencv-python/)
++ [urllib3](https://urllib3.readthedocs.io/en/latest/)
++ [scikit-learn](https://scikit-learn.org/stable/)
++ [shapely](https://pypi.org/project/Shapely/)
+  
+Use `git clone https://github.com/MingZx8/satellite.git` to save this repository or download/extract the zip file directly. The path is denoted as `<repo_path>` below.  
 
+This project uses [Google Maps API](https://cloud.google.com/maps-platform/) to download high-resolution satellite images.  
+First of all, you need an **API key** to get the authentation, here is the [instruction](https://developers.google.com/maps/gmp-get-started).  
+Replace the key variable with your API key in the file `<repo_path>/code/download.py`.  
+
+Download the geospatial data to the local path `<geo_path>`.  
+
+Download the line segment detection [tool](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi), save and extract it to your `<LSD_path>`.  
+
+Clone and install the [AerialDetection](https://github.com/dingjiansw101/AerialDetection/blob/master/INSTALL.md) tool to the local, named `<AerialDetection_path>`.  
+In order to customize input file path, replace the file `<AerialDetection_path>/tools/test.py` with the file `<repo_path>/code/test.py` or [this python file](https://github.com/ReehcQ/satellite/blob/master/code/test.py).  
+
+Download the [model](https://drive.google.com/drive/folders/1VYygIQNSsXr8Ij5B9GjqsKbNMjLuMG-x) and save it to `<model_path>`.  
+
+### One image detection
+Now you can run the program with the entry function in the file `<repo_path>/code/count_vehicle.py`:  
+```
+main(43.659435, 
+     -79.354539,
+     1024,
+     1024,
+     19,
+     2,
+     <output path>,
+     geo_file='<geo_path>/<.shp file>',
+     <--optional centreline_label='file name'>)
+```
+
+### Process step by step
+It will be time-consuming since the detection algorithm is initiated when every image is comming in. Processing images in batch (around 2000 images) is recommended.  
 
   
 # Image Preparation
-This project uses [Google Maps API](https://cloud.google.com/maps-platform/) to download high-resolution satellite images.  
-First of all, you need an **API key** to get the authentation, here is the [instruction](https://developers.google.com/maps/gmp-get-started).  
-  
 There are four main features regarding image size and resolution: **width**, **height**, **zoom**, **scale**.  
 **zoom = 2** and **scale = 19** is an optimal option to detect vehicle in the images.  
 
@@ -56,7 +99,7 @@ Replace the variable `key` with your API key.
 Use the function `download` to download satellite image.  
 
 ```
-download(43.6659008, -79.3928523, 2048, 2048, 2, 19, <output directory>, <APIkey>, <--optional file name >)
+download(43.6659008, -79.3928523, 2048, 2048, 2, 19, <output directory>, <APIkey>, <--optional centreline_label='file name' >)
 ```
   
 ###### So far, this function does not support neither the width nor the height of the image is smaller than 640
@@ -72,7 +115,6 @@ split_img(<file path>)
 ```
   
 ### Detect vehicles
-In order to customize input file path, replace the file <../AerialDetection/tools/test.py> with [this python file](https://github.com/ReehcQ/satellite/blob/master/code/test.py).  
 ```
 detect_car(<file path>)
 ```
@@ -135,4 +177,3 @@ We can get a road width estimation using k-mean clustering method.
 ## [Code](https://github.com/ReehcQ/satellite/blob/master/code/road_mask.py)
 
 
-# Reference
