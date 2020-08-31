@@ -56,30 +56,99 @@ Replace the key variable with your API key in the file `<repo_path>/code/downloa
 
 Download the geospatial data to the local path `<geo_path>`.  
 
-Download the line segment detection [tool](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi), save and extract it to your `<LSD_path>`.  
+Download the line segment detection [tool](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi), save and extract it to your `<LSD_path>`.
 
 Clone and install the [AerialDetection](https://github.com/dingjiansw101/AerialDetection/blob/master/INSTALL.md) tool to the local, named `<AerialDetection_path>`.  
 In order to customize input file path, replace the file `<AerialDetection_path>/tools/test.py` with the file `<repo_path>/code/test.py` or [this python file](https://github.com/ReehcQ/satellite/blob/master/code/test.py).  
 
-Download the [model](https://drive.google.com/drive/folders/1VYygIQNSsXr8Ij5B9GjqsKbNMjLuMG-x) and save it to `<model_path>`.  
+Download the [model](https://drive.google.com/drive/folders/1VYygIQNSsXr8Ij5B9GjqsKbNMjLuMG-x) and save it to your `<model_path>`.  
 
+In order to call the detection function, go to file `<repo_path>/detect_vehicle.py`
++ replace the variable `model` with `<model_path>`.
++ replace the variable `dota_path` with `<AerialDetection_path>`
+
+To call the line segment function, go to file `<repo_path>/generateLSD.py`, replace the variable `exe` with `<LSD_path>/lsd`.  
+  
 ### One image detection
-Now you can run the program with the entry function in the file `<repo_path>/code/count_vehicle.py`:  
+Now you can run the program with the entry function in the file `<repo_path>/code/count_vehicle.py`, e.g.:  
 ```
 main(43.659435, 
      -79.354539,
-     1024,
+     2048,
      1024,
      19,
      2,
-     <output path>,
-     geo_file='<geo_path>/<.shp file>',
-     <--optional centreline_label='file name'>)
+     '../output',
+     centreline_label='eg',
+     geo_file='../ONrte/ONrte.shp')
 ```
 
 ### Process step by step
 It will be time-consuming since the detection algorithm is initiated when every image is comming in. Processing images in batch (around 2000 images) is recommended.  
 
+#### Image Preparation
+Use the function `download` in the file `<repo_path>/code/download.py`, e.g.:  
+`download(43.659435, -79.354539, 2048, 1024, 19, 2, output_path='../output', centreline_label='eg')`  
+params:
+```
+download(  
+  latitude=43.659435,   
+  longitude=-79.354539,   
+  width=2048,   
+  height=1024,   
+  scale=19,   
+  zoom=2,   
+  output_path='../output',   
+  centreline_label='eg')
+```  
+The directory tree is like:  
+```
+- _output
+  - _eg
+    - _image
+      - image.png
+  - _eg2
+    - _image
+      - image.png
+```  
+copy the .png files out and put them into a folder named `<image_folder>/image`.  
+
+#### Vehicle detection
+Go to the file `<repo_path>/code/detect_vehile.py`.  
+```
+main(<image_folder>)
+```
+Then you have the detection result `<image_folder>/file/test.csv`.  
+In this table, the characters before the first underscore of values in the column 'img' stands for the image where the vehicle shows.  
+So you need to split the table for each image, and put then back to the original image folder.  
+Let the directory tree look like:  
+```
+- _output
+  - _eg
+    - _file
+      - test.csv
+    - _image
+      - image.png
+  - _eg2
+    - _file
+      - test.csv
+    - _image
+      - image.png
+```  
+
+#### Road mask
+Now you can use a loop with the entry function in the file `<repo_path>/code/count_vehicle.py` for each image.  
+```
+main(43.659435, 
+     -79.354539,
+     2048,
+     1024,
+     19,
+     2,
+     '../output',
+     centreline_label='eg',
+     geo_file='../ONrte/ONrte.shp')
+```
   
 # Image Preparation
 There are four main features regarding image size and resolution: **width**, **height**, **zoom**, **scale**.  
@@ -132,6 +201,8 @@ merge(<file path>, <--optional bool show_img>)
 ```
 You can use `main(<file path>, <--optional bool show_img>)` function to run these processes in a serie.
   
+  
+  
 # Road Segmentation
 The approach to mesure road width is purposed by [Xia et al., 2017](https://ieeexplore.ieee.org/document/8127098).   
 From the geospatial data, road type and road centerline are determined. A road mask is built based on the road width and centerline.  
@@ -141,9 +212,9 @@ Here are the steps:
 [Line Segment Detector](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) is used to detect line segment (straight contour) in the image.    
 
 ## [Code](https://github.com/ReehcQ/satellite/blob/master/code/generateLSD.py)
-Download the above-mentioned [tool](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) and save it to your *\<LSD path>*.
+Download the above-mentioned [tool](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) and save it to your *\<LSD_path>*.
 ```
-generate(<file path>, <LSD path>)
+generate(<file path>, <LSD_path>)
 ```
   
 #### Step 2. Select area according to the Geospatial data
