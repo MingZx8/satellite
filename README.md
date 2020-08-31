@@ -1,6 +1,8 @@
 # Overview
 This project is purposed to detect and **count traffic** in the **satellite images** in order to estimate AADT for road segments. Compared to traditional manual methods of traffic collection, this approach is more efficient and economic.  
   
+![result](https://github.com/MingZx8/satellite/blob/master/imgs/result.png)
+  
 The approach consists of three main steps: 
 + [Image preparation](https://github.com/ReehcQ/satellite#image-preparation-1)
 + [Vehicle detection](https://github.com/ReehcQ/satellite#vehicle-detection-1)
@@ -82,6 +84,8 @@ main(43.659435,
      centreline_label='eg',
      geo_file='../ONrte/ONrte.shp')
 ```
+The vehicle count result will show in `<output_path>/count_station.csv` and visually show as `<output_path>/count.csv`.    
+
 
 ### Process step by step
 It will be time-consuming since the detection algorithm is initiated when every image is comming in. Processing images in batch (around 2000 images) is recommended.  
@@ -163,7 +167,7 @@ The largest size of image that the API provided is 640*640, so this function giv
 The satellite images with high resolution is always available for main city like Toronto.  
 In a few part of Quebec, only low quality images or even no image are provided by Google Maps.
 
-## [Code](https://github.com/ReehcQ/satellite/blob/master/code/download.py)
+[Code](https://github.com/ReehcQ/satellite/blob/master/code/download.py)  
 Replace the variable `key` with your API key.  
 Use the function `download` to download satellite image.  
 
@@ -175,7 +179,7 @@ download(43.6659008, -79.3928523, 2048, 2048, 2, 19, <output directory>, <APIkey
 
   
 # Vehicle Detection
-## [Code](https://github.com/ReehcQ/satellite/blob/master/code/detect_vehicle.py)
+[Code](https://github.com/ReehcQ/satellite/blob/master/code/detect_vehicle.py)  
 This process includes four steps:  
 ### Split image
 The image will be split into 1024\*1024, and it will generate a .json file including split img name and its features such as size.  
@@ -211,7 +215,7 @@ Here are the steps:
 ![step 1](https://github.com/ReehcQ/satellite/blob/master/imgs/step1.png)
 [Line Segment Detector](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) is used to detect line segment (straight contour) in the image.    
 
-## [Code](https://github.com/ReehcQ/satellite/blob/master/code/generateLSD.py)
+[Code](https://github.com/ReehcQ/satellite/blob/master/code/generateLSD.py)  
 Download the above-mentioned [tool](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) and save it to your *\<LSD_path>*.
 ```
 generate(<file path>, <LSD_path>)
@@ -245,6 +249,6 @@ We can get a road width estimation using k-mean clustering method.
 #### Step 6. Build road mask and recognize route direction
 ![step 6](https://github.com/ReehcQ/satellite/blob/master/imgs/step6.png) 
   
-## [Code](https://github.com/ReehcQ/satellite/blob/master/code/road_mask.py)
+[Code](https://github.com/ReehcQ/satellite/blob/master/code/road_mask.py)  
 
 
