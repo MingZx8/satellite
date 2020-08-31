@@ -8,14 +8,10 @@ import os
 import geopandas as gpd
 import pandas as pd
 import numpy as np
-import difflib
 import cv2
-import re
 import random
-import time
 from shapely import wkt
 from shapely.geometry import Point, Polygon, LineString
-import gc
 
 import road_mask
 import detect_vehicle
@@ -36,7 +32,7 @@ def main(
         output_path,
         centreline_label='',
         show_count=False,
-        geo_file='/media/ming/data/GeospecialData/ONrte/ONrte.shp'
+        geo_file='/media/ming/data/GeospatialData/ONrte/ONrte.shp'
 ):
     '''
     :param latitude: float
@@ -80,8 +76,10 @@ def main(
         img = cv2.imread(img_file)
 
     # image info
-    img_width = img.shape[0]
-    img_height = img.shape[1]
+    img_width = img.shape[1]
+    img_height = img.shape[0]
+    n = max(img_width // 1096, img_height // 1096)
+    resize_size = (img_width // n, img_height // n)
     resolution = get_scale(latitude)
     centroid = Point((int(img_width / 2), int(img_height / 2)))
 
@@ -135,7 +133,7 @@ def main(
     #             (0, 0, 127),
     #             thickness=5
     #         )
-    # img_overlay = cv2.resize(img_overlay, (1024, 1024), interpolation=cv2.INTER_CUBIC)
+    # img_overlay = cv2.resize(img_overlay, resize_size, interpolation=cv2.INTER_CUBIC)
     # cv2.imshow('', img_overlay)
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
@@ -343,7 +341,7 @@ def main(
     cv2.addWeighted(
         img_overlay, 0.5, img, 0.5, 0, img_overlay
     )
-    img_mask = cv2.resize(img_overlay, (1024, 1024), interpolation=cv2.INTER_CUBIC)
+    img_mask = cv2.resize(img_overlay, resize_size, interpolation=cv2.INTER_CUBIC)
     cv2.imwrite(count_img_file, img_mask)
 
     if show_count:
@@ -396,10 +394,10 @@ def main(
 if __name__ == '__main__':
     main(
         43.659435, -79.354539,
-        1024,
+        2048,
         1024,
         19,
         2,
-        '/home/ming/Desktop/Satellite/code/output',
-        centreline_label='2'
+        '../output',
+        centreline_label='eg'
     )

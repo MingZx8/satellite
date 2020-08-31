@@ -131,7 +131,7 @@ def main(
         show_filtered_segment=False,
         show_paired_segment=False,
         show_mask=False,
-        geo_file='/media/ming/data/GeospecialData/ONrte/ONrte.shp'
+        geo_file='/media/ming/data/GeospatialData/ONrte/ONrte.shp'
 ):
     '''
     :param file_path: str
@@ -173,6 +173,8 @@ def main(
     img_mask = img.copy()
     img_width = img.shape[1]
     img_height = img.shape[0]
+    n = max(img_width // 1096, img_height // 1096)
+    resize_size = (img_width // n, img_height // n)
 
     # generate lsd file
     if not os.path.exists(line_name):
@@ -360,7 +362,7 @@ def main(
             cv2.addWeighted(
                 overlay, 0.5, img, 0.5, 0, overlay
             )
-            overlay = cv2.resize(overlay, (1024, 1024), interpolation=cv2.INTER_CUBIC)
+            overlay = cv2.resize(overlay, resize_size, interpolation=cv2.INTER_CUBIC)
             if show_selected_area:
                 cv2.imshow(' ', overlay)
                 cv2.waitKey(0)
@@ -392,7 +394,7 @@ def main(
                              (23, 117, 187),
                              thickness=3
                              )
-                img_copy = cv2.resize(img_copy, (1024, 1024), interpolation=cv2.INTER_CUBIC)
+                img_copy = cv2.resize(img_copy, resize_size, interpolation=cv2.INTER_CUBIC)
                 cv2.imshow(' ', img_copy)
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
@@ -463,7 +465,7 @@ def main(
                              (253, 200, 84),
                              thickness=3
                              )
-                img_copy = cv2.resize(img_copy, (1024, 1024), interpolation=cv2.INTER_CUBIC)
+                img_copy = cv2.resize(img_copy, resize_size, interpolation=cv2.INTER_CUBIC)
                 cv2.imshow(' ', img_copy)
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
@@ -523,7 +525,7 @@ def main(
                              color,
                              thickness=3
                              )
-            img_copy = cv2.resize(img_copy, (1024, 1024), interpolation=cv2.INTER_CUBIC)
+            img_copy = cv2.resize(img_copy, resize_size, interpolation=cv2.INTER_CUBIC)
             if show_paired_segment:
                 cv2.imshow(' ', img_copy)
                 cv2.waitKey(0)
@@ -632,7 +634,7 @@ def main(
             cv2.addWeighted(
                 img_copy, 0.5, img, 0.5, 0, img_copy
             )
-            img_copy = cv2.resize(img_copy, (1024, 1024), interpolation=cv2.INTER_CUBIC)
+            img_copy = cv2.resize(img_copy, resize_size, interpolation=cv2.INTER_CUBIC)
             # cv2.imwrite(mask_name, img_copy)
             if show_mask:
                 cv2.imshow(' ', img_copy)
@@ -704,7 +706,7 @@ def main(
     cv2.addWeighted(
         img_mask, 0.5, img, 0.5, 0, img_mask
     )
-    img_mask = cv2.resize(img_mask, (1024, 1024), interpolation=cv2.INTER_CUBIC)
+    img_mask = cv2.resize(img_mask, resize_size, interpolation=cv2.INTER_CUBIC)
     cv2.imwrite(os.path.join(file_path, 'mask.png'), img_mask)
 
     gdf_line.to_csv(geo_selected_file)
@@ -712,5 +714,5 @@ def main(
 
 
 if __name__ == '__main__':
-    main('/home/ming/Desktop/Satellite/code/output/1', 43.668581, -79.394941)
+    main('../output/eg', 43.668581, -79.394941)
 

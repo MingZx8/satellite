@@ -15,8 +15,11 @@ from convert import get_scale, dist2point
 key = 'AIzaSyBYl7ex9kviiTW3cJvvmlMFWDbrKQAqZe0'
 
 
-def get_url(latitude, longitude, key,
-            width=640, height=640,
+def get_url(latitude,
+            longitude,
+            key,
+            width=640,
+            height=640,
             zoom=19,
             scale=2,
             ):
@@ -48,8 +51,15 @@ def url_to_image(url):
     return image
 
 
-def download(latitude, longitude, width, height, zoom, scale, output_path,
-             key=key, centreline_label=''):
+def download(latitude,
+             longitude,
+             width,
+             height,
+             zoom,
+             scale,
+             output_path,
+             key=key,
+             centreline_label=''):
     '''
     download google maps image and write to path
 
@@ -61,10 +71,10 @@ def download(latitude, longitude, width, height, zoom, scale, output_path,
         from 1 to 22
     :param scale: int
         1 or 2
-    :param path_output: str
-    :key str
+    :param output_path: str
+    :param key str
         optional, google map api key
-    :centreline_label str
+    :param centreline_label str
         optional, by default, the file path is set as 'lat, lon', it will be named as given
     :return: np.array
         img
@@ -115,4 +125,4 @@ def download(latitude, longitude, width, height, zoom, scale, output_path,
 
 
 if __name__ == '__main__':
-    download(43.668581, -79.394941, 2048, 1024, 19, 2, output_path='/home/ming/Desktop/Satellite/code/output')
+    download(43.659435, -79.354539, 2048, 1024, 19, 2, output_path='../output', centreline_label='eg')

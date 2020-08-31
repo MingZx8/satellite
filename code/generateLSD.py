@@ -7,6 +7,8 @@
 from PIL import Image
 import os
 
+exe = '/home/ming/Desktop/Satellite/code/lsd_1.6/lsd'
+
 
 # png to tiff
 def png2tiff(path, path_dest):
@@ -28,10 +30,7 @@ def png2pgm(input, output):
     )
 
 
-def generate(
-        file_path,
-        exe='/home/ming/Desktop/Satellite/code/lsd_1.6/lsd',
-):
+def generate(file_path):
     print('detecting line segments...')
     img_path = os.path.join(file_path, 'image', 'image.png')
     output = '{}/lsd.pgm'.format(file_path)
@@ -45,5 +44,5 @@ def generate(
 
 
 if __name__ == '__main__':
-    file_path = '/home/ming/Desktop/Satellite/code/output/43.668581,-79.394941'
+    file_path = '../output/eg'
     generate(file_path)

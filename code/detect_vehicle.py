@@ -8,18 +8,18 @@ import sys
 import os
 import pickle
 import json
-import shutil
 import random
 import numpy as np
 import pandas as pd
 import re
 import cv2
 from shapely.geometry import Polygon
-import gc
 
-sys.path.append('/home/ming/Desktop/Satellite/aadt')
+dota_path = '/home/ming/Desktop/Satellite/code/dota/AerialDetection'
+model = '/home/ming/Desktop/Satellite/code/dota/DOTA_pytorch/model/faster_rcnn_RoITrans_r50_fpn_1x_dota/epoch_12.pth'
 
-from dota.AerialDetection.DOTA_devkit import SplitOnlyImage_multi_process, DOTA2COCO
+sys.path.append(dota_path)
+from DOTA_devkit import SplitOnlyImage_multi_process, DOTA2COCO
 
 
 def split_img(file_path):
@@ -53,13 +53,15 @@ def split_img(file_path):
 
 def detect_car(
         file_path,
-        test_file='/home/ming/Desktop/Satellite/code/dota/AerialDetection/tools/test.py',
-        config_file='/home/ming/Desktop/Satellite/code/dota/AerialDetection/configs/DOTA/faster_rcnn_RoITrans_r50_fpn_1x_dota.py',
-        model='/home/ming/Desktop/Satellite/code/dota/DOTA_pytorch/model/faster_rcnn_RoITrans_r50_fpn_1x_dota/epoch_12.pth'
+        model=model
 ):
-    annfile = '{}/file/test.json'.format(file_path)
-    imgprefix = '{}/split'.format(file_path)
-    output = '/{}/file/output.pkl'.format(file_path)
+    test_file = '{}/tools/test.py'.format(dota_path)
+    config_file = '{}/configs/DOTA/faster_rcnn_RoITrans_r50_fpn_1x_dota.py'.format(dota_path)
+
+    abs_file_path = os.path.abspath(file_path)
+    annfile = '{}/file/test.json'.format(abs_file_path)
+    imgprefix = '{}/split'.format(abs_file_path)
+    output = '{}/file/output.pkl'.format(abs_file_path)
 
     os.system(
         'python {} {} {} '
@@ -190,8 +192,8 @@ def merge(
             )
         width = img.shape[1]
         height = img.shape[0]
-        n = max(width//1096, height//1096)
-        img = cv2.resize(img, (width//n, height//n), interpolation=cv2.INTER_CUBIC)
+        n = max(width // 1096, height // 1096)
+        img = cv2.resize(img, (width // n, height // n), interpolation=cv2.INTER_CUBIC)
         cv2.imshow(' ', img)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
@@ -213,9 +215,10 @@ def main(file_path, show_img=False):
 
 
 if __name__ == '__main__':
-    file_path = '/home/ming/Desktop/Satellite/code/output/43.668581,-79.394941'
-    # split_img(file_path)
-    # detect_car(file_path)
-    # pkl2csv(file_path)
-    # merge(file_path, show_img=True)
-    main(file_path, show_img=True)
+    # file_path = '../output/eg'
+    # main(file_path, show_img=True)
+
+    # split_img('/home/ming/Desktop/satellite-master/output/eg_multi')
+    # detect_car('/home/ming/Desktop/satellite-master/output/eg_multi')
+    # pkl2csv('/home/ming/Desktop/satellite-master/output/eg_multi')
+    main('/home/ming/Desktop/satellite-master/output/eg_multi')
