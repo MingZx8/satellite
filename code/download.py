@@ -12,7 +12,7 @@ import cv2
 import math
 from convert import get_scale, dist2point
 
-key = 'AIzaSyBYl7ex9kviiTW3cJvvmlMFWDbrKQAqZe0'
+key = ''
 
 
 def get_url(latitude,
