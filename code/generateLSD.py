@@ -38,7 +38,7 @@ def generate(file_path):
 
     result = '{}/lsd.txt'.format(file_path)
     os.system(
-        '{} {} {}'.format(exe, output, result)
+        '"{}" "{}" "{}"'.format(exe, output, result)
     )
     os.remove(output)
 
