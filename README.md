@@ -58,7 +58,7 @@ Replace the key variable with your API key in the file `<repo_path>/code/downloa
 
 Download the geospatial data to the local path `<geo_path>`.  
 
-Download the line segment detection [tool](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi), save and extract it to your `<LSD_path>`.
+Download the line segment detection [tool](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi), save and extract it to your `<LSD_path>`. In terminal, go to the folder and run command 'make'.
 
 Clone and install the [AerialDetection](https://github.com/dingjiansw101/AerialDetection/blob/master/INSTALL.md) tool to the local, named `<AerialDetection_path>`.  
 In order to customize input file path, replace the file `<AerialDetection_path>/tools/test.py` with the file `<repo_path>/code/test.py` or [this python file](https://github.com/ReehcQ/satellite/blob/master/code/test.py).  
@@ -213,7 +213,8 @@ From the geospatial data, road type and road centerline are determined. A road m
 Here are the steps:
 #### Step 1. Line segment detection
 ![step 1](https://github.com/ReehcQ/satellite/blob/master/imgs/step1.png)
-[Line Segment Detector](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) is used to detect line segment (straight contour) in the image.    
+[Line Segment Detector](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) is used to detect line segment (straight contour) in the image.  
+Download the tool. In terminal, go to the folder and run command 'make'.
 
 [Code](https://github.com/ReehcQ/satellite/blob/master/code/generateLSD.py)  
 Download the above-mentioned [tool](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi) and save it to your *\<LSD_path>*.
