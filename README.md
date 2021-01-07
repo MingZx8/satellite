@@ -1,4 +1,5 @@
 # Overview
+This is a transportation and environment project from TRAQ group in the University of Toronto.  
 This project is purposed to detect and **count traffic** in the **satellite images** in order to estimate AADT for road segments. Compared to traditional manual methods of traffic collection, this approach is more efficient and economic.  
   
 ![result](https://github.com/MingZx8/satellite/blob/master/imgs/result.png)
