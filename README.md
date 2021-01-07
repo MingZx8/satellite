@@ -283,3 +283,7 @@ year = {2019}
 ```
 Grompone von Gioi, R., Jakubowicz, J., Morel, J.-M., & Randall, G. (2012). LSD: a Line Segment Detector. Image Processing On Line, 2, 35–55. https://doi.org/10.5201/ipol.2012.gjmr-lsd
 ```
+## [Road width measurement from remote sensing images](https://uwaterloo.ca/geospatial-sensing/sites/ca.geospatial-sensing/files/uploads/files/0000902.pdf)
+```
+Z. Xia, Y. Zang, C. Wang and J. Li, "Road width measurement from remote sensing images," 2017 IEEE International Geoscience and Remote Sensing Symposium (IGARSS), Fort Worth, TX, 2017, pp. 902-905, doi: 10.1109/IGARSS.2017.8127098.
+```
