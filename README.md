@@ -252,4 +252,33 @@ We can get a road width estimation using k-mean clustering method.
   
 [Code](https://github.com/ReehcQ/satellite/blob/master/code/road_mask.py)  
 
+# Reference
+## [DOTA (A Large-scale Dataset for Object DeTection in Aerial Images)](https://captain-whu.github.io/DOTA/)
+```
+@inproceedings{xia2018dota,
+  title={DOTA: A large-scale dataset for object detection in aerial images},
+  author={Xia, Gui-Song and Bai, Xiang and Ding, Jian and Zhu, Zhen and Belongie, Serge and Luo, Jiebo and Datcu, Mihai and Pelillo, Marcello and Zhang, Liangpei},
+  booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
+  pages={3974--3983},
+  year={2018}
+}
 
+@article{chen2019mmdetection,
+  title={MMDetection: Open mmlab detection toolbox and benchmark},
+  author={Chen, Kai and Wang, Jiaqi and Pang, Jiangmiao and Cao, Yuhang and Xiong, Yu and Li, Xiaoxiao and Sun, Shuyang and Feng, Wansen and Liu, Ziwei and Xu, Jiarui and others},
+  journal={arXiv preprint arXiv:1906.07155},
+  year={2019}
+}
+
+@InProceedings{Ding_2019_CVPR,
+author = {Ding, Jian and Xue, Nan and Long, Yang and Xia, Gui-Song and Lu, Qikai},
+title = {Learning RoI Transformer for Oriented Object Detection in Aerial Images},
+booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2019}
+}
+```
+## [LSD (Line Segment Detection)](http://www.ipol.im/pub/art/2012/gjmr-lsd/?utm_source=doi)
+```
+Grompone von Gioi, R., Jakubowicz, J., Morel, J.-M., & Randall, G. (2012). LSD: a Line Segment Detector. Image Processing On Line, 2, 35–55. https://doi.org/10.5201/ipol.2012.gjmr-lsd
+```
