@@ -1,8 +1,10 @@
+# Traffic Extraction from Satellite Images 
+
 # Overview
 This is a transportation and environment project from TRAQ group in the University of Toronto.  
 This project is purposed to detect and **count traffic** in the **satellite images** in order to estimate AADT for road segments. Compared to traditional manual methods of traffic collection, this approach is more efficient and economic.  
   
-![result](https://github.com/MingZx8/satellite/blob/master/imgs/result.png)
+![result](https://github.com/MingZx8/satellite/blob/master/imgs/result.png?raw=true)
   
 The approach consists of three main steps: 
 + [Image preparation](https://github.com/ReehcQ/satellite#image-preparation-1)
