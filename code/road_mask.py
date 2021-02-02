@@ -155,7 +155,7 @@ def main(
     # file loading#################################################################################
     file_name = file_path.split('/')[-1]
     img_file = '{}/image/image.png'.format(file_path)
-    geo_path = os.path.join('/'.join(file_path.split('/')[:-1]), 'SubGeoFolder')
+    geo_path = os.path.join('/'.join(geo_file.split('/')[:-1]), 'SubGeoFolder')
     try:
         os.mkdir(geo_path)
     except FileExistsError:
