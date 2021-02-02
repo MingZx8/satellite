@@ -96,8 +96,8 @@ def main(
         df_mask.geometry = df_mask.geometry.apply(wkt.loads)
     else:
         df_mask = road_mask.main(file_path,
-                                 latitude,
                                  longitude,
+                                 latitude,
                                  geo_file=geo_file
                                  )
         if isinstance(df_mask, type(None)):
