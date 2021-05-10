@@ -55,7 +55,7 @@ Use `git clone https://github.com/MingZx8/satellite.git` to save this repository
 
 This project uses [Google Maps API](https://cloud.google.com/maps-platform/) to download high-resolution satellite images.  
 First of all, you need an **API key** to get the authentation, here is the [instruction](https://developers.google.com/maps/gmp-get-started).  
-Replace the key variable with your API key in the file `<repo_path>/code/download.py`.  
+Replace the API_KEY variable with your API key in the file `<repo_path>/code/download.py`.  
 
 Download the geospatial data to the local path `<geo_path>`.  
 
@@ -70,7 +70,7 @@ In order to call the detection function, go to file `<repo_path>/detect_vehicle.
 + replace the variable `model` with `<model_path>`.
 + replace the variable `dota_path` with `<AerialDetection_path>`
 
-To call the line segment function, go to file `<repo_path>/generateLSD.py`, replace the variable `exe` with `<LSD_path>/lsd`.  
+To call the line segment function, go to file `<repo_path>/generateLSD.py`, replace the variable `EXECUTE_PATH` with `<LSD_path>/lsd`.  
   
 ### Single image detection
 Now you can run the program with the entry function in the file `<repo_path>/code/count_vehicle.py`, e.g.:  
