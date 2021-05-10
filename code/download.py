@@ -5,24 +5,32 @@
 # Description: download satellite image from google image API
 # Guide: https://developers.google.com/maps/documentation/maps-static/dev-guide
 
-import urllib
-import numpy as np
-import os
-import cv2
 import math
+import os
+import urllib.request
+
+import cv2
+import numpy as np
+
 from convert import get_scale, dist2point
 
-key = ''
+API_KEY = ''
 
 
-def get_url(latitude,
-            longitude,
-            key,
-            width=640,
-            height=640,
-            zoom=19,
-            scale=2,
-            ):
+def get_url(latitude, longitude,
+            key=API_KEY,
+            width=640, height=640, zoom=19, scale=2):
+    """
+    Setting 
+    :param latitude: float
+    :param longitude: float
+    :param key: str, api key of google static map
+    :param width: int
+    :param height: int
+    :param zoom: int, 1-22
+    :param scale: int, 1 or 2
+    :return: str, url for downloading the image
+    """
     # location
     center = 'center={},{}'.format(latitude, longitude)  # the center of the map
     zoom = 'zoom={}'.format(zoom)  # the zoom level of the map
@@ -42,54 +50,48 @@ def get_url(latitude,
 
 
 def url_to_image(url):
-    # download the image, convert it to a NumPy array, and then read
-    # it into OpenCV format
+    # download the image, convert it to a NumPy array, and then read it into OpenCV format
     with urllib.request.urlopen(url) as resp:
         image = np.asarray(bytearray(resp.read()), dtype="uint8")
         image = cv2.imdecode(image, cv2.IMREAD_COLOR)
-        # return the image
+    # return the image
     return image
 
 
-def download(latitude,
-             longitude,
-             width,
-             height,
-             zoom,
-             scale,
+def download(latitude, longitude,
+             width, height,
+             zoom, scale,
              output_path,
-             key=key,
+             key=API_KEY,
              centreline_label=''):
-    '''
-    download google maps image and write to path
+    """
+    Download google maps satellite image and write to the path
 
     :param latitude: float
     :param longitude: float
     :param width: int
     :param height: int
-    :param zoom: int
-        from 1 to 22
-    :param scale: int
-        1 or 2
+    :param zoom: int, from 1 to 22
+    :param scale: int, 1 or 2
     :param output_path: str
-    :param key str
-        optional, google map api key
-    :param centreline_label str
-        optional, by default, the file path is set as 'lat, lon', it will be named as given
-    :return: np.array
-        img
-    '''
+    :param key: str, optional, google map api key
+    :param centreline_label: str, optional, by default, the file path is set as 'lat, lon', it will be named as given
+    :return: np.array, image
+    """
     # TODO: if width or height < 640
     # TODO: remove logo
+    # create a folder, name it with the coordinate by default
     img_path = centreline_label if centreline_label else '{},{}'.format(latitude, longitude)
     try:
         os.mkdir(os.path.join(output_path, img_path))
     except FileExistsError:
         pass
+    # create a image sub folder
     try:
         os.mkdir(os.path.join(output_path, img_path, 'image'))
     except FileExistsError:
         pass
+    # name the image
     output_path = os.path.join(output_path, img_path, 'image', 'image.png')
     n_width = math.ceil(width / 640) // 2
     n_height = math.ceil(height / 640) // 2
@@ -125,4 +127,5 @@ def download(latitude,
 
 
 if __name__ == '__main__':
+    # example
     download(43.659435, -79.354539, 2048, 1024, 19, 2, output_path='../output', centreline_label='eg')
