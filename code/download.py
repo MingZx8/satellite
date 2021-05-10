@@ -1,7 +1,7 @@
 # Python version: Python3.6
 # @Author: MingZZZZZZZZ
 # @Date created: 2020 Feb 13
-# @Date modified: 2020 August 10
+# @Date modified: 2021
 # Description: download satellite image from google image API
 # Guide: https://developers.google.com/maps/documentation/maps-static/dev-guide
 
