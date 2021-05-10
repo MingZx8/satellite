@@ -1,7 +1,7 @@
 # Python version: Python3.6
 # @Author: MingZZZZZZZZ
 # @Date created: 2020
-# @Date modified: 2020
+# @Date modified: 2021
 # Description:
 
 
@@ -9,7 +9,8 @@ import math
 
 
 def get_scale(latitude, zoom=19, scale=2):
-    '''
+    """
+    Given the latitude, zoom level and scale, return the scale in meter per pixel.
 
     :param latitude: float
     :param zoom: int
@@ -18,19 +19,20 @@ def get_scale(latitude, zoom=19, scale=2):
         1 or 2
     :return: float
         meter per pixel
-    '''
+    """
     return 156543.03392 * math.cos(latitude * math.pi / 180) / math.pow(2, zoom) / scale
 
 
 def point2dist(lat1, lon1, lat2, lon2):
-    '''
-    distance between 2 points of coordinate
+    """
+    Distance between 2 locations
+
     :param lat1: float
     :param lon1: float
     :param lat2: float
     :param lon2: float
     :return: tuple, (latitude distance, longitude distance)
-    '''
+    """
     lat1 = math.radians(lat1)
     lon1 = math.radians(lon1)
     lat2 = math.radians(lat2)
@@ -44,13 +46,14 @@ def point2dist(lat1, lon1, lat2, lon2):
 
 
 def dist2point(dlat_m, dlon_m, lat):
-    '''
-    given distance in meter and latitude, return distance in coordinate
-    :param dlat_m:
-    :param dlon_m:
-    :param lat:
-    :return:
-    '''
+    """
+    Given distance in meter and latitude, return distance in coordinate
+
+    :param dlat_m: float, change in meter for latitude
+    :param dlon_m: float, change in meter for longitude
+    :param lat: float
+    :return: tuple, (change in latitude, change in longitude)
+    """
     x = math.tan(dlat_m / 6373 / 2 / 1000) ** 2
     y = math.tan(dlon_m / 6373 / 2 / 1000) ** 2
     a = x / (x + 1)
@@ -61,15 +64,15 @@ def dist2point(dlat_m, dlon_m, lat):
 
 
 def point2pixel(lat1, lon1, lat2, lon2, res):
-    '''
+    """
     given two points of coordinate and resolution, return the distance in pixel
-    :param lat1:
-    :param lon1:
-    :param lat2:
-    :param lon2:
-    :param res:
-    :return: tuple, (lat, lon)
-    '''
+    :param lat1: float, latitude of the first point
+    :param lon1: float, longitude of the second point
+    :param lat2: float, latitude of the first point
+    :param lon2: float, longitude of the second point
+    :param res: float, the scale of the image, can be calculated using function 'get_scale'
+    :return: tuple, (lat, lon) in pixel
+    """
     dist = point2dist(lat1, lon1, lat2, lon2)
     lat_dist = dist[0]
     lon_dist = dist[1]
@@ -84,14 +87,14 @@ def point2pixel(lat1, lon1, lat2, lon2, res):
 
 
 def dist_in_image(pt1, pt2, img_height, img_width):
-    '''
+    """
     distance in pixel
-    :param pt1: tuple
-    :param pt2: tuple
-    :param img_height:
-    :param img_width:
-    :return: float
-    '''
+    :param pt1: tuple, coordinates in the image in pixel
+    :param pt2: tuple, coordinates in the image in pixel
+    :param img_height: float, height of image in pixel
+    :param img_width: float, width of image in pixel
+    :return: float, distance of 2 points in pixel
+    """
     lon_min = min(pt1[0], pt2[0])
     lon_max = max(pt1[0], pt2[0])
     lat_min = min(pt1[1], pt2[1])
